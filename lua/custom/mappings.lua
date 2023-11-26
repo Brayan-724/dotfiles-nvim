@@ -3,7 +3,35 @@ local M = {}
 
 M.general = {
   n = {
-    [";"] = { ":", "enter command mode", opts = { nowait = true } },
+    [";"] = { ":", "Enter command mode", opts = { nowait = true } },
+    ["gr"] = {
+      function()
+        vim.cmd "Telescope lsp_references"
+      end,
+      "Go to references",
+    },
+
+    ["gd"] = {
+      function()
+        vim.cmd "Telescope lsp_definitions"
+      end,
+      "Go to definitions",
+    },
+
+    ["<leader>q"] = {
+      function()
+        vim.cmd "Telescope diagnostics"
+      end,
+      "Go to definitions",
+    },
+
+    ["<leader>cd"] = {
+      function()
+        vim.cmd "Telescope zoxide list"
+      end,
+      "Go to definitions",
+    },
+
     ["<leader>fm"] = {
       function()
         if vim.bo.filetype == "rust" then

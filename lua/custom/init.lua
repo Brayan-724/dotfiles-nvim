@@ -9,17 +9,11 @@ if vim.fn.has "wsl" == 1 then
       local stdout = uv.new_pipe()
       local stderr = uv.new_pipe()
 
-      local handle, pid = uv.spawn("clip.exe", { stdio = { stdin, stdout, stderr } }, function(code, signal) -- on exit
-        print("exit code", code)
-        print("exit signal", signal)
-      end)
+      local handle = uv.spawn("clip.exe", { stdio = { stdin, stdout, stderr } }, function() end)
 
       uv.write(stdin, vim.fn.getreg '"')
       uv.shutdown(stdin, function()
-        print("stdin shutdown", stdin)
-        uv.close(handle, function()
-          print("process closed", handle, pid)
-        end)
+        uv.close(handle, function() end)
       end)
     end,
   })

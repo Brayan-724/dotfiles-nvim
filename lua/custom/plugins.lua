@@ -208,7 +208,15 @@ local plugins = {
   },
 
   {
-    "rcarriga/nvim-notify"
+    "rcarriga/nvim-notify",
+  },
+
+  {
+    "IndianBoy42/tree-sitter-just",
+    lazy = false,
+    config = function()
+      require("tree-sitter-just").setup {}
+    end,
   },
 
   { import = "custom.extras.autosave" },
