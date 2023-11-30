@@ -4,6 +4,11 @@ local spec = {
     "okuuva/auto-save.nvim",
     event = { "InsertLeave", "TextChanged" },
     opts = {
+      trigger_events = {
+        immediate_save = { "InsertLeave", "TextChanged" },
+        defer_save = {},
+        cancel_defered_save = {},
+      },
       execution_message = {
         enabled = false,
       },
@@ -28,6 +33,8 @@ local spec = {
           for _, bufnr in ipairs(vim.g.OLD_AUTOFORMAT_BUFFERS or {}) do
             vim.b[bufnr].autoformat_enabled = true
           end
+
+          require("custom.fmt").run()
         end,
       },
     },

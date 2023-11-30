@@ -25,3 +25,7 @@ vim.filetype.add {
     mdx = "astro",
   },
 }
+
+--- Kompiler
+local kompiler = require('custom.extras.kompiler')
+kompiler.setup()

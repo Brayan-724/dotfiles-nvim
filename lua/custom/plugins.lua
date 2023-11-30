@@ -219,6 +219,56 @@ local plugins = {
     end,
   },
 
+  {
+    "folke/todo-comments.nvim",
+    event = "BufEnter",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      FIX = {
+        icon = " ",
+        color = "error",
+        alt = { "FIXME", "BUG", "FIXIT", "ISSUE" },
+      },
+      TODO = { icon = " ", color = "info" },
+      HACK = { icon = " ", color = "warning" },
+      WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
+      PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+      NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
+      TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
+    },
+  },
+
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {
+      lsp = {
+        -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+        override = {
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          ["vim.lsp.util.stylize_markdown"] = true,
+          ["cmp.entry.get_documentation"] = true,
+        },
+      },
+      -- you can enable a preset for easier configuration
+      presets = {
+        bottom_search = true, -- use a classic bottom cmdline for search
+        command_palette = true, -- position the cmdline and popupmenu together
+        long_message_to_split = true, -- long messages will be sent to a split
+        inc_rename = false, -- enables an input dialog for inc-rename.nvim
+        lsp_doc_border = false, -- add a border to hover docs and signature help
+      },
+    },
+    dependencies = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      "rcarriga/nvim-notify",
+    },
+  },
+
   { import = "custom.extras.autosave" },
   { import = "custom.extras.codeactionsmenu" },
 }
