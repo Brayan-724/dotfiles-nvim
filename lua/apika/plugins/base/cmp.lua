@@ -8,7 +8,7 @@ return {
       dependencies = "rafamadriz/friendly-snippets",
       opts = { history = true, updateevents = "TextChanged,TextChangedI" },
       config = function(_, opts)
-        require("plugins.configs.others").luasnip(opts)
+        require("_plugins.configs.others").luasnip(opts)
       end,
     },
 

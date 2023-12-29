@@ -189,7 +189,7 @@ M.lspconfig = {
 
     ["<leader>ra"] = {
       function()
-        require("nvchad.renamer").open()
+        require("apika.renamer").open()
       end,
       "LSP rename",
     },

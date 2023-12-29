@@ -1,5 +1,5 @@
 local M = {}
-local utils = require "core.utils"
+-- local utils = require "core.utils"
 
 M.blankline = {
   indentLine_enabled = 1,
@@ -59,7 +59,7 @@ M.gitsigns = {
     untracked = { text = "│", hl = "GitSignsAdd", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
   },
   on_attach = function(bufnr)
-    utils.load_mappings("gitsigns", { buffer = bufnr })
+    -- utils.load_mappings("gitsigns", { buffer = bufnr })
   end,
 }
 

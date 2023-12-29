@@ -32,6 +32,9 @@ local highlights = {
   CursorLineSign = { bg = colors.term_background, fg = colors.red },
 
   LineNr = { bg = colors.term_background, fg = "#eeeeee", bold = true },
+  LineNrAbove = { bg = colors.term_background, fg = "#eeeeee", bold = true },
+  LineNrBelow = { bg = colors.term_background, fg = "#eeeeee", bold = true },
+  LspInfoBorder = { link = "FloatBorder" },
   SignColumn = { link = "ColorColumn" },
   WinSeparator = { fg = colors.nebula11 },
 

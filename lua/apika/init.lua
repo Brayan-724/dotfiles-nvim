@@ -1,11 +1,26 @@
 local opt = vim.opt
 local g = vim.g
 
+------------------------------------- clipboard -----------------------------------------
+g.clipboard = {
+  name = "WslClipboard",
+  copy = {
+    ["+"] = "clip.exe",
+    ["*"] = "clip.exe",
+  },
+  paste = {
+    ["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    ["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+  },
+  cache_enabled = 0,
+}
+
 -------------------------------------- options ------------------------------------------
 opt.laststatus = 3 -- global statusline
 opt.showmode = false
 
-opt.clipboard = "unnamedplus"
+-- g.clipboard = "WslClipboard"
+-- opt.clipboard = "unnamedplus"
 opt.cursorline = true
 
 -- Indenting
@@ -72,27 +87,29 @@ autocmd("FileType", {
 })
 
 -- Copy to system
-local uv = vim.uv
+-- local uv = vim.uv
 
-vim.g.clipboard = "unnamedplus"
-
-if vim.fn.has "wsl" == 1 then
-  autocmd("TextYankPost", {
-    group = vim.api.nvim_create_augroup("Yank", { clear = true }),
-    callback = function()
-      local stdin = uv.new_pipe()
-      local stdout = uv.new_pipe()
-      local stderr = uv.new_pipe()
-
-      local handle = uv.spawn("clip.exe", { stdio = { stdin, stdout, stderr } }, function() end)
-
-      uv.write(stdin, vim.fn.getreg '"')
-      uv.shutdown(stdin, function()
-        uv.close(handle, function() end)
-      end)
-    end,
-  })
-end
+-- vim.g.clipboard = "unnamedplus"
+--
+-- if vim.fn.has "wsl" == 1 then
+--   autocmd("TextYankPost", {
+--     group = vim.api.nvim_create_augroup("Yank", { clear = true }),
+--     callback = function()
+--       local stdin = uv.new_pipe()
+--       local stdout = uv.new_pipe()
+--       local stderr = uv.new_pipe()
+--
+--       local handle = uv.spawn("clip.exe", { stdio = { stdin, stdout, stderr } })
+--
+--       uv.write(stdin, vim.fn.getreg '"')
+--       uv.shutdown(stdin, function()
+--         vim.defer_fn(function()
+--           handle:kill(9)
+--         end, 2000)
+--       end)
+--     end,
+--   })
+-- end
 
 -------------------------------------- commands ------------------------------------------
 local new_cmd = vim.api.nvim_create_user_command
