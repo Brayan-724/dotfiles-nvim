@@ -27,12 +27,10 @@ local function none_sources()
 
     -- Lua
     b.formatting.stylua,
+    b.formatting.fnlfmt.with { extra_filetypes = { "yuck" } },
 
     -- cpp
     b.formatting.clang_format,
-
-    -- rust
-    b.formatting.rustfmt.with { extra_args = { "--edition=2022" } },
 
     -- git
     b.code_actions.gitsigns,
@@ -62,10 +60,11 @@ return {
   },
   config = function()
     require "apika.config.lsp"
-    require "apika.config.lsp.lua"
+    require "apika.config.lsp.astro"
     require "apika.config.lsp.css"
     require "apika.config.lsp.deno"
-    require "apika.config.lsp.tsserver"
+    require "apika.config.lsp.lua"
     require "apika.config.lsp.rust"
+    require "apika.config.lsp.tsserver"
   end,
 }

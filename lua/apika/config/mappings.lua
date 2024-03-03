@@ -1,6 +1,5 @@
 -- n, v, i, t = mode names
 
----@type MappingsTable
 local M = {}
 
 M.general = {
@@ -17,10 +16,15 @@ M.general = {
   },
 
   n = {
+    ["<leader>nd"] = {
+      "<cmd> NoiceDismiss <CR>",
+      "Dismiss Noice notifications",
+    },
+
     -- close buff
     ["<leader>x"] = {
-      function ()
-        require "apika.tabline.tabline".close_buffer(vim.api.nvim_get_current_buf())
+      function()
+        require("apika.tabline.tabline").close_buffer(vim.api.nvim_get_current_buf())
       end,
       "Close buffer",
     },
@@ -39,7 +43,7 @@ M.general = {
     ["<C-c>"] = { "<cmd> %y+ <CR>", "Copy whole file" },
 
     -- line numbers
-    ["<leader>n"] = { "<cmd> set nu! <CR>", "Toggle line number" },
+    -- ["<leader>n"] = { "<cmd> set nu! <CR>", "Toggle line number" },
     ["<leader>rn"] = { "<cmd> set rnu! <CR>", "Toggle relative number" },
 
     -- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
@@ -154,17 +158,18 @@ M.lspconfig = {
 
     ["gd"] = {
       function()
-        vim.lsp.buf.definition()
+        -- vim.lsp.buf.definition()
+        vim.cmd "Lspsaga peek_definition"
       end,
       "LSP definition",
     },
 
-    ["K"] = {
-      function()
-        vim.lsp.buf.hover()
-      end,
-      "LSP hover",
-    },
+    -- ["K"] = {
+    --   function()
+    --     vim.lsp.buf.hover()
+    --   end,
+    --   "LSP hover",
+    -- },
 
     ["gi"] = {
       function()
@@ -182,31 +187,36 @@ M.lspconfig = {
 
     ["<leader>D"] = {
       function()
-        vim.lsp.buf.type_definition()
+        -- vim.lsp.buf.type_definition()
+        vim.cmd "Lspsaga peek_type_definition"
       end,
       "LSP definition type",
     },
 
     ["<leader>ra"] = {
       function()
-        require("apika.renamer").open()
+        -- require("apika.renamer").open()
+        vim.cmd "Lspsaga rename"
       end,
       "LSP rename",
     },
 
     ["<leader>ca"] = {
       function()
-        vim.lsp.buf.code_action()
+        -- vim.lsp.buf.code_action()
+        vim.cmd "Lspsaga code_action"
       end,
       "LSP code action",
     },
 
-    ["gr"] = {
-      function()
-        vim.lsp.buf.references()
-      end,
-      "LSP references",
-    },
+    -- NOTE: Use Telescope instead
+    --
+    -- ["gr"] = {
+    --   function()
+    --     vim.lsp.buf.references()
+    --   end,
+    --   "LSP references",
+    -- },
 
     ["<leader>lf"] = {
       function()
@@ -229,12 +239,14 @@ M.lspconfig = {
       "Goto next",
     },
 
-    ["<leader>q"] = {
-      function()
-        vim.diagnostic.setloclist()
-      end,
-      "Diagnostic setloclist",
-    },
+    -- NOTE: Use Telescope instead
+    --
+    -- ["<leader>q"] = {
+    --   function()
+    --     vim.diagnostic.setloclist()
+    --   end,
+    --   "Diagnostic setloclist",
+    -- },
 
     ["<leader>wa"] = {
       function()
@@ -261,7 +273,8 @@ M.lspconfig = {
   v = {
     ["<leader>ca"] = {
       function()
-        vim.lsp.buf.code_action()
+        -- vim.lsp.buf.code_action()
+        vim.cmd "Lspsaga code_action"
       end,
       "LSP code action",
     },
@@ -276,116 +289,6 @@ M.nvimtree = {
 
     -- focus
     ["<leader>e"] = { "<cmd> NvimTreeFocus <CR>", "Focus nvimtree" },
-  },
-}
-
-M.telescope = {
-
-  n = {
-    -- find
-    ["<leader>ff"] = { "<cmd> Telescope find_files <CR>", "Find files" },
-    ["<leader>fa"] = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", "Find all" },
-    ["<leader>fw"] = { "<cmd> Telescope live_grep <CR>", "Live grep" },
-    ["<leader>fb"] = { "<cmd> Telescope buffers <CR>", "Find buffers" },
-    ["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "Help page" },
-    ["<leader>fo"] = { "<cmd> Telescope oldfiles <CR>", "Find oldfiles" },
-    ["<leader>fz"] = { "<cmd> Telescope current_buffer_fuzzy_find <CR>", "Find in current buffer" },
-
-    -- git
-    ["<leader>cm"] = { "<cmd> Telescope git_commits <CR>", "Git commits" },
-    ["<leader>gt"] = { "<cmd> Telescope git_status <CR>", "Git status" },
-
-    -- pick a hidden term
-    ["<leader>pt"] = { "<cmd> Telescope terms <CR>", "Pick hidden term" },
-
-    -- theme switcher
-    ["<leader>th"] = { "<cmd> Telescope themes <CR>", "Nvchad themes" },
-
-    ["<leader>ma"] = { "<cmd> Telescope marks <CR>", "telescope bookmarks" },
-  },
-}
-
-M.nvterm = {
-
-  t = {
-    -- toggle in terminal mode
-    ["<A-i>"] = {
-      function()
-        require("nvterm.terminal").toggle "float"
-      end,
-      "Toggle floating term",
-    },
-
-    ["<A-h>"] = {
-      function()
-        require("nvterm.terminal").toggle "horizontal"
-      end,
-      "Toggle horizontal term",
-    },
-
-    ["<A-v>"] = {
-      function()
-        require("nvterm.terminal").toggle "vertical"
-      end,
-      "Toggle vertical term",
-    },
-  },
-
-  n = {
-    -- toggle in normal mode
-    ["<A-i>"] = {
-      function()
-        require("nvterm.terminal").toggle "float"
-      end,
-      "Toggle floating term",
-    },
-
-    ["<A-h>"] = {
-      function()
-        require("nvterm.terminal").toggle "horizontal"
-      end,
-      "Toggle horizontal term",
-    },
-
-    ["<A-v>"] = {
-      function()
-        require("nvterm.terminal").toggle "vertical"
-      end,
-      "Toggle vertical term",
-    },
-
-    -- new
-    ["<leader>h"] = {
-      function()
-        require("nvterm.terminal").new "horizontal"
-      end,
-      "New horizontal term",
-    },
-
-    ["<leader>v"] = {
-      function()
-        require("nvterm.terminal").new "vertical"
-      end,
-      "New vertical term",
-    },
-  },
-}
-
-M.whichkey = {
-  n = {
-    ["<leader>wK"] = {
-      function()
-        vim.cmd "WhichKey"
-      end,
-      "Which-key all keymaps",
-    },
-    ["<leader>wk"] = {
-      function()
-        local input = vim.fn.input "WhichKey: "
-        vim.cmd("WhichKey " .. input)
-      end,
-      "Which-key query lookup",
-    },
   },
 }
 
@@ -474,9 +377,10 @@ M.gitsigns = {
 
 return function()
   require("apika.utils").set_mapping(M.general)
+
+  require("apika.utils").set_mapping(M.blankline)
   require("apika.utils").set_mapping(M.gitsigns)
-  -- require "apika.utils".set_mapping(M.nvterm)
+  require("apika.utils").set_mapping(M.lspconfig)
   require("apika.utils").set_mapping(M.nvimtree)
   require("apika.utils").set_mapping(M.tabufline)
-  require("apika.utils").set_mapping(M.lspconfig)
 end

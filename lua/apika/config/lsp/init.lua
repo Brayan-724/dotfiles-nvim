@@ -38,6 +38,15 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
   relative = "cursor",
 })
 
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+  underline = true,
+  virtual_text = {
+    spacing = 5,
+    severity_limit = "Warning",
+  },
+  update_in_insert = true,
+})
+
 -- Borders for LspInfo winodw
 local win = require "lspconfig.ui.windows"
 local _default_opts = win.default_opts

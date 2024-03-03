@@ -8,6 +8,10 @@ function M.astro()
   vim.cmd "!prettier --plugin prettier-plugin-astro --write %"
 end
 
+function M.svelte()
+  vim.cmd "!prettier --plugin prettier-plugin-svelte --write %"
+end
+
 function M.run_filetype(filetype)
   if M[filetype] then
     M[filetype]()

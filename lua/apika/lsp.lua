@@ -8,7 +8,7 @@ function M.on_attach(client)
   client.server_capabilities.documentRangeFormattingProvider = false
 
   if client.server_capabilities.signatureHelpProvider then
-    require("nvchad.signature").setup(client)
+    require("apika.signature").setup(client)
   end
 
   -- client.server_capabilities.semanticTokensProvider = nil

@@ -19,8 +19,8 @@ function M.mappings()
       -- pick a hidden term
       ["<leader>pt"] = { "<cmd> Telescope terms <CR>", "Pick hidden term" },
 
-      -- theme switcher
-      ["<leader>th"] = { "<cmd> Telescope themes <CR>", "Nvchad themes" },
+      -- Noice
+      ["<leader>nn"] = { "<cmd> NoiceTelescope <CR>", "List Noice messages" },
 
       ["<leader>ma"] = { "<cmd> Telescope marks <CR>", "telescope bookmarks" },
     },

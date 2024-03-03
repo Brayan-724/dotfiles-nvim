@@ -2,6 +2,7 @@ local M = {}
 
 function M.opts()
   return {
+    strict = true,
     override = {
       default_icon = {
         icon = "󰈚",
@@ -146,6 +147,14 @@ function M.opts()
       zip = {
         icon = "",
         name = "zip",
+      },
+    },
+
+    override_by_extension = {
+      astro = {
+        icon = "",
+        color = "#EF8547",
+        name = "astro",
       },
     },
   }

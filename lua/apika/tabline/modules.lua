@@ -71,6 +71,14 @@ local function add_fileInfo(name, bufnr, maxwidth_len)
 
     return string.rep(" ", padding) .. name .. string.rep(" ", padding)
   end
+
+  -- padding around bufname; 24 = bufame length (icon + filename)
+  local padding = (maxwidth_len - #name - 5) / 2
+  local maxname_len = 16
+
+  name = (#name > maxname_len and string.sub(name, 1, 14) .. "..") or name
+
+  return string.rep(" ", padding) .. name .. string.rep(" ", padding)
 end
 
 local function styleBufferTab(nr, maxname_len)

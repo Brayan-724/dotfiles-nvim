@@ -6,7 +6,7 @@ return {
 
     "jvgrootveld/telescope-zoxide",
   },
-  cmd = "Telescope",
+  lazy = false,
   init = function()
     require "apika.lsp".keymap(require("apika.config.telescope"))
   end,

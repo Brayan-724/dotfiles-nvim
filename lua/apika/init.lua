@@ -2,18 +2,35 @@ local opt = vim.opt
 local g = vim.g
 
 ------------------------------------- clipboard -----------------------------------------
-g.clipboard = {
-  name = "WslClipboard",
-  copy = {
-    ["+"] = "clip.exe",
-    ["*"] = "clip.exe",
-  },
-  paste = {
-    ["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-    ["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-  },
-  cache_enabled = 0,
-}
+if vim.fn.has "wsl" == 1 then
+-- WSL
+  g.clipboard = {
+    name = "WslClipboard",
+    copy = {
+      ["+"] = "clip.exe",
+      ["*"] = "clip.exe",
+    },
+    paste = {
+      ["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+      ["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    },
+    cache_enabled = 0,
+  }
+else
+  -- Linux
+  g.clipboard = {
+    name = "custom",
+    copy = {
+      ["+"] = "clipcatctl load",
+      ["*"] = "clipcatctl load",
+    },
+    paste = {
+      ["+"] = 'clipcatctl save',
+      ["*"] = 'clipcatctl save',
+    },
+    cache_enabled = 0,
+  }
+end
 
 -------------------------------------- options ------------------------------------------
 opt.laststatus = 3 -- global statusline
@@ -65,7 +82,7 @@ for _, provider in ipairs { "node", "perl", "python3", "ruby" } do
 end
 
 -- add binaries installed by mason.nvim to path
-local is_windows = vim.uv.os_uname().sysname == "Windows_NT"
+local is_windows = vim.loop.os_uname().sysname == "Windows_NT"
 vim.env.PATH = vim.fn.stdpath "data" .. "/mason/bin" .. (is_windows and ";" or ":") .. vim.env.PATH
 
 vim.filetype.add {
