@@ -6,6 +6,7 @@ return {
     build = ":TSUpdate",
     opts = require("apika.config.treesitter").opts,
     config = function(_, opts)
+      require("apika.config.treesitter").config()
       require("nvim-treesitter.configs").setup(opts)
     end,
   },
@@ -13,7 +14,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter-context",
     event = "BufEnter",
-    opts = { mode = "topline" },
+    opts = { mode = "cursor" },
 
     dependencies = {
       "nvim-treesitter/nvim-treesitter",

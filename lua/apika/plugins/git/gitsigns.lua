@@ -1,7 +1,7 @@
 return {
-  -- git stuff
   {
     "lewis6991/gitsigns.nvim",
+    apika_config = "git.gitsigns",
     ft = { "gitcommit", "diff" },
     init = function()
       -- load gitsigns only when a git file is opened
@@ -18,11 +18,9 @@ return {
         end,
       })
     end,
-    opts = function()
-      return require "apika.config.git.gitsigns"
-    end,
-    config = function(_, opts)
+    opts = require("apika.utils").opts_config,
+    config = require("apika.utils").config(function(_, opts)
       require("gitsigns").setup(opts)
-    end,
+    end),
   },
 }

@@ -18,22 +18,15 @@ function M.init_lazy()
   require "apika.plugins".setup()
 end
 
-function M.init_statusline()
-  vim.opt.statusline = "%!v:lua.require('apika.statusline').run()"
-end
-
-function M.init_mappings()
-  require("apika.config.mappings")()
-end
-
 function M.ignite()
   require "apika.init"
   M.init_lazy()
+  require "apika.neovide"
 
-  M.init_statusline()
+  vim.opt.statusline = "%!v:lua.require('apika.statusline').run()"
   require "apika.tabline"
 
-  M.init_mappings()
+  require("apika.config.mappings")()
 
   require "apika.theme.custom"
 

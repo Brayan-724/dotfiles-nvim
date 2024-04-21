@@ -92,7 +92,7 @@ local options = {
       border = border "CmpDocBorder",
       winhighlight = "Normal:CmpDoc",
     },
-  },
+ },
   snippet = {
     expand = function(args)
       require("luasnip").lsp_expand(args.body)

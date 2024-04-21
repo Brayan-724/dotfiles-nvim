@@ -21,15 +21,17 @@ else
   g.clipboard = {
     name = "custom",
     copy = {
-      ["+"] = "clipcatctl load",
-      ["*"] = "clipcatctl load",
+      ["+"] = "xclip -selection clipboard -i",
+      ["*"] = "xclip -selection clipboard -i",
     },
     paste = {
-      ["+"] = 'clipcatctl save',
-      ["*"] = 'clipcatctl save',
+      ["+"] = 'xclip -selection clipboard -o',
+      ["*"] = 'xclip -selection clipboard -o',
     },
     cache_enabled = 0,
   }
+
+  opt.clipboard = g.clipboard
 end
 
 -------------------------------------- options ------------------------------------------
@@ -92,6 +94,10 @@ vim.filetype.add {
   },
 }
 
+-- vim.g.markdown_fenced_languages = {
+--   "ts=typescript"
+-- }
+
 -------------------------------------- autocmds ------------------------------------------
 local autocmd = vim.api.nvim_create_autocmd
 
@@ -103,30 +109,20 @@ autocmd("FileType", {
   end,
 })
 
--- Copy to system
--- local uv = vim.uv
-
--- vim.g.clipboard = "unnamedplus"
---
--- if vim.fn.has "wsl" == 1 then
---   autocmd("TextYankPost", {
---     group = vim.api.nvim_create_augroup("Yank", { clear = true }),
---     callback = function()
---       local stdin = uv.new_pipe()
---       local stdout = uv.new_pipe()
---       local stderr = uv.new_pipe()
---
---       local handle = uv.spawn("clip.exe", { stdio = { stdin, stdout, stderr } })
---
---       uv.write(stdin, vim.fn.getreg '"')
---       uv.shutdown(stdin, function()
---         vim.defer_fn(function()
---           handle:kill(9)
---         end, 2000)
---       end)
---     end,
---   })
--- end
+autocmd("BufReadPost", {
+  pattern = "*",
+  callback = function()
+    local line = vim.fn.line "'\""
+    if
+      line > 1
+      and line <= vim.fn.line "$"
+      and vim.bo.filetype ~= "commit"
+      and vim.fn.index({ "xxd", "gitrebase" }, vim.bo.filetype) == -1
+    then
+      vim.cmd 'normal! g`"'
+    end
+  end,
+})
 
 -------------------------------------- commands ------------------------------------------
 local new_cmd = vim.api.nvim_create_user_command
@@ -135,23 +131,6 @@ new_cmd("ReloadConfig", function()
   local reload = require("plenary.reload").reload_module
   reload "apika.ignite"
   reload "apika.plugins"
-  -- reload
 
-  -- config = require("core.utils").load_config()
-
-  -- vim.g.nvchad_theme = config.ui.theme
-  -- vim.g.transparency = config.ui.transparency
-
-  -- statusline
-  -- require("plenary.reload").reload_module("nvchad.statusline." .. config.ui.statusline.theme)
-  -- vim.opt.statusline = "%!v:lua.require('nvchad.statusline." .. config.ui.statusline.theme .. "').run()"
-
-  -- tabufline
-  -- if config.ui.tabufline.enabled then
-  --   require("plenary.reload").reload_module "nvchad.tabufline.modules"
-  --   vim.opt.tabline = "%!v:lua.require('nvchad.tabufline.modules').run()"
-  -- end
-
-  -- require("base46").load_all_highlights()
   vim.cmd "redraw!"
 end, {})

@@ -11,7 +11,9 @@ function M.opts()
       "css-lsp",
       "html-lsp",
       "typescript-language-server",
-      "deno",
+
+      -- python
+      "ruff-lsp"
     },
 
     PATH = "skip",

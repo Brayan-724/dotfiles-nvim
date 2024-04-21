@@ -65,6 +65,8 @@ local highlights = {
   WhichKeyFloat = { fg = colors.light_grey, bg = colors.term_background },
   WhichKeySeparator = { fg = colors.red, bg = colors.term_background },
   WhichKeyValue = { fg = colors.light_grey },
+
+  DiffAdd = { fg = colors.red, bg = colors.term_background },
 }
 
 require("apika.theme.utils").set_highlights(highlights)

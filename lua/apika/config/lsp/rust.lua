@@ -29,9 +29,9 @@ lsp_utils.setup("rust_analyzer", {
       },
       diagnostics = {
         enable = true,
-        -- experimental = {
-        --   enable = true,
-        -- },
+        experimental = {
+          enable = true,
+        },
       },
       imports = {
         group = {
@@ -43,7 +43,10 @@ lsp_utils.setup("rust_analyzer", {
         prefix = "self",
       },
       procMacros = {
-        enable = true,
+        enable = false, -- FIX: napi ignore doesn't work
+        ignored = {
+          ["napi-derive"] = { "napi" },
+        },
       },
 
       lru = {

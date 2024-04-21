@@ -1,9 +1,11 @@
 local M = {}
 
 local plugins = {
+  { import = "apika.plugins.lsp" },
   { import = "apika.plugins.base" },
   { import = "apika.plugins.git" },
   { import = "apika.plugins.rust" },
+  { import = "apika.plugins.dev" },
 }
 
 function M.setup()

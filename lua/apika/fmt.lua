@@ -4,6 +4,10 @@ function M.rust()
   vim.cmd "!cargo fmt"
 end
 
+function M.ts()
+  vim.cmd "!deno fmt"
+end
+
 function M.astro()
   vim.cmd "!prettier --plugin prettier-plugin-astro --write %"
 end

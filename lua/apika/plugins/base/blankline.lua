@@ -1,31 +1,27 @@
 return {
   "lukas-reineke/indent-blankline.nvim",
-  version = "2.20.7",
   -- init = function()
   --    require("core.utils").lazy_load "indent-blankline.nvim"
   -- end,
   opts = {
-    indentLine_enabled = 1,
-    filetype_exclude = {
-      "help",
-      "terminal",
-      "lazy",
-      "lspinfo",
-      "TelescopePrompt",
-      "TelescopeResults",
-      "mason",
-      "nvdash",
-      "nvcheatsheet",
-      "",
+    enabled = true,
+    exclude = {
+      filetypes = {
+        "help",
+        "terminal",
+        "lazy",
+        "lspinfo",
+        "TelescopePrompt",
+        "TelescopeResults",
+        "mason",
+        "dashboard",
+        "",
+      },
     },
-    buftype_exclude = { "terminal" },
-    show_trailing_blankline_indent = false,
-    show_first_indent_level = false,
-    show_current_context = true,
-    show_current_context_start = true,
   },
   config = function(_, opts)
-    -- require("core.utils").load_mappings "blankline"
-    require("indent_blankline").setup(opts)
+    require("ibl").setup(opts)
+
+    require "apika.theme.blankline"
   end,
 }

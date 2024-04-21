@@ -46,28 +46,6 @@ function M.setup(name, _opts)
 end
 
 M.set_mapping = require("apika.utils").set_mapping
-
----@param m table|function
----@return nil
-function M.keymap(m)
-  if type(m.mappings) ~= "nil" then
-    m = m.mappings
-  end
-
-  if type(m) == "function" then
-    m = m()
-  end
-
-  if type(m.mappings) ~= "nil" then
-    M.keymap(m.mappings)
-    return
-  end
-
-  if type(m) == "table" then
-    require("apika.utils").set_mapping(m)
-  elseif type(m) ~= "nil" then
-    M.keymap(m)
-  end
-end
+M.keymap = require("apika.utils").keymap
 
 return M

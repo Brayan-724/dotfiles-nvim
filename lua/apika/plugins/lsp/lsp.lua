@@ -3,7 +3,6 @@ local function none_sources()
 
   local sources = {
     -- webdev stuff
-    b.formatting.deno_fmt,
     b.formatting.biome.with {
       filetypes = { "json", "jsonc" },
     },
@@ -34,9 +33,6 @@ local function none_sources()
 
     -- git
     b.code_actions.gitsigns,
-
-    -- python
-    b.diagnostics.ruff,
   }
 
   return sources
@@ -52,7 +48,7 @@ return {
       opts = none_sources,
       config = function(_, sources)
         require "null-ls".setup {
-          debug = true,
+          debug = false,
           sources = sources,
         }
       end,
@@ -63,8 +59,13 @@ return {
     require "apika.config.lsp.astro"
     require "apika.config.lsp.css"
     require "apika.config.lsp.deno"
+    require "apika.config.lsp.json"
     require "apika.config.lsp.lua"
+    require "apika.config.lsp.python"
     require "apika.config.lsp.rust"
+    require "apika.config.lsp.svelte"
+    require "apika.config.lsp.toml"
     require "apika.config.lsp.tsserver"
+    require "apika.config.lsp.yaml"
   end,
 }
