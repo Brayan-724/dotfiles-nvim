@@ -1,5 +1,6 @@
 return {
-  dir = "~/Downloads/codeshot.nvim/",
+  "SergioRibera/codeshot.nvim",
+  -- dir = "~/Downloads/codeshot.nvim/",
   opts = {
     copy = "%c | xclip -selection clipboard -t image/png",
     -- copy = "%c | xclip -selection clipboard",
