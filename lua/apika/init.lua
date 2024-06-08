@@ -18,23 +18,25 @@ if vim.fn.has "wsl" == 1 then
   }
 else
   -- Linux
-  g.clipboard = {
-    name = "custom",
-    copy = {
-      ["+"] = "xclip -selection clipboard -i",
-      ["*"] = "xclip -selection clipboard -i",
-    },
-    paste = {
-      ["+"] = 'xclip -selection clipboard -o',
-      ["*"] = 'xclip -selection clipboard -o',
-    },
-    cache_enabled = 0,
-  }
+  -- g.clipboard = {
+  --   name = "custom",
+  --   copy = {
+  --     ["+"] = "xclip -selection clipboard -i",
+  --     ["*"] = "xclip -selection clipboard -i",
+  --   },
+  --   paste = {
+  --     ["+"] = 'xclip -selection clipboard -o',
+  --     ["*"] = 'xclip -selection clipboard -o',
+  --   },
+  --   cache_enabled = 0,
+  -- }
 
-  opt.clipboard = g.clipboard
+  opt.clipboard = "unnamedplus"
 end
 
 -------------------------------------- options ------------------------------------------
+-- opt.autochdir = true
+
 opt.laststatus = 3 -- global statusline
 opt.showmode = false
 
@@ -91,6 +93,7 @@ vim.filetype.add {
   extension = {
     astro = "astro",
     mdx = "astro",
+    pest = "pest",
   },
 }
 

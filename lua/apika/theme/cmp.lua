@@ -1,15 +1,15 @@
 local colors = require "apika.theme.colors"
 
 local highlights = {
-  CmpBorder = { fg = colors.nebula11, bg = colors.term_background },
+  CmpBorder = { fg = colors.baby_pink, bg = colors.term_background },
   CmpDoc = { bg = colors.term_background },
-  CmpDocBorder = { fg = colors.nebula11, bg = colors.term_background },
+  CmpDocBorder = { fg = colors.baby_pink, bg = colors.term_background },
   CmpItemAbbr = { fg = colors.white },
   CmpItemAbbrMatch = { fg = colors.blue, bold = true },
   CmpPmenu = {
     bg = colors.term_background,
   },
-  CmpSel = { link = "PmenuSel", bold = true },
+  CmpSel = { fg = colors.baby_pink, bold = true },
 }
 
 -- cmp item kinds
@@ -49,4 +49,6 @@ local item_kinds = {
 
 highlights = vim.tbl_deep_extend("force", highlights, item_kinds)
 
-require("apika.theme.utils").set_highlights(highlights)
+vim.schedule(function()
+  require("apika.theme.utils").set_highlights(highlights)
+end)

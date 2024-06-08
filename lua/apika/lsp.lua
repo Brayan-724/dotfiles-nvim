@@ -2,7 +2,6 @@ local M = {
   lspconfig = require "lspconfig",
 }
 
-
 function M.on_attach(client)
   client.server_capabilities.documentFormattingProvider = false
   client.server_capabilities.documentRangeFormattingProvider = false
@@ -13,6 +12,17 @@ function M.on_attach(client)
 
   -- client.server_capabilities.semanticTokensProvider = nil
 end
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client and client.server_capabilities.inlayHintProvider then
+      vim.lsp.inlay_hint.enable(args.buf, true)
+    end
+    -- whatever other lsp config you want
+  end,
+})
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 

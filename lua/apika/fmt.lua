@@ -4,8 +4,8 @@ function M.rust()
   vim.cmd "!cargo fmt"
 end
 
-function M.ts()
-  vim.cmd "!deno fmt"
+function M.typescript()
+  vim.cmd "!deno fmt %"
 end
 
 function M.astro()

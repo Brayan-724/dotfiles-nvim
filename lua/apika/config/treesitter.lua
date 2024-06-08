@@ -36,8 +36,6 @@ function M.config()
     },
   }
 
-  -- require("vim.treesitter.query").set("aml3", "highlights", "(command) @keyword")
-
   vim.filetype.add {
     extension = {
       aml3 = "aml3",

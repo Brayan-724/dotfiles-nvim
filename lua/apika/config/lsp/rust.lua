@@ -14,7 +14,7 @@ lsp_utils.setup("rust_analyzer", {
         enable = false,
       },
       cargo = {
-        allFeatures = true,
+        allFeatures = false,
         buildScripts = {
           enable = true,
         },
@@ -42,21 +42,28 @@ lsp_utils.setup("rust_analyzer", {
         },
         prefix = "self",
       },
-      procMacros = {
-        enable = false, -- FIX: napi ignore doesn't work
-        ignored = {
-          ["napi-derive"] = { "napi" },
-        },
-      },
-
-      lru = {
-        capacity = 64,
-      },
       inlayHints = {
         expressionAdjustmentHints = {
           enabled = true,
         },
+        parameterHints = {
+          enabled = false,
+        },
+        typeHints = {
+          enabled = false,
+        },
       },
+      lru = {
+        capacity = 64,
+      },
+      procMacros = {
+        enable = true, -- FIX: napi ignore doesn't work
+        ignored = {
+          ["napi-derive"] = { "napi" },
+          ["tokio"] = { "main" },
+        },
+      },
+
     },
   },
 })

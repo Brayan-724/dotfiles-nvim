@@ -27,7 +27,7 @@ end
 
 return {
   "hrsh7th/nvim-cmp",
-  event = "InsertEnter",
+  lazy = false,
   dependencies = {
     {
       -- snippet plugin
@@ -68,7 +68,7 @@ return {
     return require "apika.config.cmp"
   end,
   config = function(_, opts)
-    require "apika.theme.cmp"
     require("cmp").setup(opts)
+    require "apika.theme.cmp"
   end,
 }

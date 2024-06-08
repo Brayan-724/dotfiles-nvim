@@ -2,8 +2,8 @@ local cmp = require "cmp"
 
 local cmp_ui = {
   lspkind_text = false,
-  -- border_color = "red",
-  -- selected_item_bg = "colored",
+  border_color = "red",
+  selected_item_bg = "colored",
 }
 
 local icons = {
@@ -49,7 +49,6 @@ local icons = {
   TabNine = "",
 }
 
-
 local formatting_style = {
   -- default fields order i.e completion word + item.kind + item.kind icons
   fields = { "abbr", "kind", "menu" },
@@ -86,13 +85,13 @@ local options = {
     completion = {
       side_padding = 1,
       winhighlight = "Normal:CmpPmenu,CursorLine:CmpSel,Search:None",
-      scrollbar = false,
+      scrollbar = true,
     },
     documentation = {
       border = border "CmpDocBorder",
       winhighlight = "Normal:CmpDoc",
     },
- },
+  },
   snippet = {
     expand = function(args)
       require("luasnip").lsp_expand(args.body)
@@ -141,9 +140,25 @@ local options = {
     { name = "nvim_lsp" },
     { name = "luasnip" },
     { name = "buffer" },
+    { name = "neorg" },
     { name = "nvim_lua" },
     { name = "path" },
   },
+  enabled = function()
+    local ft_disabled = {
+      sagarename = true,
+      TelescopePrompt = true,
+    }
+    local ft = vim.bo.filetype
+
+    local disabled = ft_disabled[ft] or false
+
+    if disabled then
+      require "cmp".close()
+    end
+
+    return not disabled
+  end,
 }
 
 options.window.completion.border = border "CmpBorder"

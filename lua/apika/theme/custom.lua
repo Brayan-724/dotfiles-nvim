@@ -5,7 +5,7 @@ local highlights = {
   Constant = { fg = colors.dark_purple },
   Conditional = { fg = colors.green },
   Define = { fg = colors.nebula11 },
-  FloatBorder = { fg = colors.nebula11, bg = colors.term_background },
+  FloatBorder = { fg = colors.baby_pink, bg = colors.term_background },
   Identifier = { fg = colors.red },
   Keyword = { fg = colors.nebula11 },
   Normal = { bg = colors.term_background },
@@ -23,6 +23,7 @@ local highlights = {
   ["@string"] = { fg = colors.darkgreen },
   ["@type.definition"] = { link = "Keyword" },
   ["@variable"] = { link = "Variable" },
+  ["@lsp.type.variable"] = { link = "Variable" },
 
   ColorColumn = { bg = colors.term_background, fg = colors.white },
   CursorColumn = { link = "ColorColumn" },
@@ -43,7 +44,7 @@ local highlights = {
 
   NoiceCmdlineIcon = { fg = colors.nebula10, bg = colors.term_background },
   NoiceCmdlineIconSearch = { fg = colors.baby_pink, bg = colors.term_background },
-  NoiceCmdlinePopupBorder = { fg = colors.nebula11, bg = colors.term_background },
+  NoiceCmdlinePopupBorder = { fg = colors.baby_pink, bg = colors.term_background },
   NoiceCmdlinePopupBorderSearch = { fg = colors.baby_pink, bg = colors.term_background },
   NoiceCmdlinePopupTitle = { fg = colors.nebula11, bg = colors.term_background },
 
@@ -60,7 +61,7 @@ local highlights = {
   NvimTreeNormalNC = { link = "NvimTreeNormal" },
   NvimTreeOpenedFolderName = { fg = colors.nebula11, bold = true },
 
-  TelescopeBorder = { fg = colors.nebula11 },
+  TelescopeBorder = { fg = colors.baby_pink },
 
   WhichKeyFloat = { fg = colors.light_grey, bg = colors.term_background },
   WhichKeySeparator = { fg = colors.red, bg = colors.term_background },

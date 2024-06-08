@@ -22,6 +22,7 @@ function M.ignite()
   require "apika.init"
   M.init_lazy()
   require "apika.neovide"
+  require "apika.wezterm"
 
   vim.opt.statusline = "%!v:lua.require('apika.statusline').run()"
   require "apika.tabline"
@@ -29,7 +30,6 @@ function M.ignite()
   require("apika.config.mappings")()
 
   require "apika.theme.custom"
-
 end
 
 return M
