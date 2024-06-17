@@ -1,41 +1,16 @@
-require("apika.ignite").ignite()
+local ignite_path = vim.fn.stdpath "config" .. "/ignite"
+local ignite_dir = vim.uv.fs_scandir(ignite_path)
 
--- Initialize rocks
-local function ignite_rocks()
-  local rocks_config = {
-    rocks_path = "/home/apika/.local/share/nvim/rocks",
-    luarocks_binary = "luarocks",
-  }
+while true do
+  local file = vim.uv.fs_scandir_next(ignite_dir)
+  if file == nil then
+    break
+  end
 
-  vim.g.rocks_nvim = rocks_config
-
-  local luarocks_path = {
-    vim.fs.joinpath(rocks_config.rocks_path, "share", "lua", "5.1", "?.lua"),
-    vim.fs.joinpath(rocks_config.rocks_path, "share", "lua", "5.1", "?", "init.lua"),
-  }
-  package.path = package.path .. ";" .. table.concat(luarocks_path, ";")
-
-  local luarocks_cpath = {
-    vim.fs.joinpath(rocks_config.rocks_path, "lib", "lua", "5.1", "?.so"),
-    vim.fs.joinpath(rocks_config.rocks_path, "lib64", "lua", "5.1", "?.so"),
-  }
-  package.cpath = package.cpath .. ";" .. table.concat(luarocks_cpath, ";")
-
-  vim.opt.runtimepath:append(
-    vim.fs.joinpath(rocks_config.rocks_path, "lib", "luarocks", "rocks-5.1", "rocks.nvim", "*")
-  )
-
-
-  require "apika.init"
-  require "rocks".packadd "rocks.nvim"
-  require "apika.neovide"
-
-  vim.opt.statusline = "%!v:lua.require('apika.statusline').run()"
-  require "apika.tabline"
-
-  require("apika.config.mappings")()
-
-  require "apika.theme.custom"
+  local absolute_path = ignite_path .. "/" .. file
+  vim.cmd.luafile(absolute_path)
 end
 
--- vim.schedule(ignite_rocks)
+require "apika.config.mappings"()
+
+-- require "apika.theme.custom"

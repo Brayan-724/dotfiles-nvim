@@ -35,7 +35,7 @@ M.modes = {
   ["vs"] = { "󰈈 (Ctrl O)", "St_VisualMode" },
   ["V"] = { "󰈈", "St_VisualMode" },
   ["Vs"] = { "󰈈", "St_VisualMode" },
-  -- [""] = { "󰈈", "St_VisualMode" },
+  [""] = { "󰈈", "St_VisualMode" },
 
   ["i"] = { "󰏫", "St_InsertMode" },
   ["ic"] = { "󰏫", "St_InsertMode" },

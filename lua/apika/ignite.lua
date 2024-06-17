@@ -1,35 +1,18 @@
 local M = {}
 
-function M.init_lazy()
-  local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
-
-  if not vim.loop.fs_stat(lazypath) then
-    local utils = require "apika.utils"
-
-    --------- lazy.nvim ---------------
-    utils.echo "  Installing lazy.nvim & plugins ..."
-    local repo = "https://github.com/folke/lazy.nvim.git"
-    utils.shell_call { "git", "clone", "--depth=1", "--filter=blob:none", "--branch=stable", repo, lazypath }
-    vim.opt.rtp:prepend(lazypath)
-  end
-
-  vim.opt.rtp:prepend(lazypath)
-
-  require "apika.plugins".setup()
-end
-
 function M.ignite()
-  require "apika.init"
-  M.init_lazy()
-  require "apika.neovide"
-  require "apika.wezterm"
+  local ignite_path = vim.fn.stdpath("config") .. "/ignite"
+  local ignite_dir = vim.uv.fs_scandir(ignite_path)
 
-  vim.opt.statusline = "%!v:lua.require('apika.statusline').run()"
-  require "apika.tabline"
+  while true do
+    local file = vim.uv.fs_scandir_next(ignite_dir)
+    if file == nil then
+      break
+    end
 
-  require("apika.config.mappings")()
-
-  require "apika.theme.custom"
+    local absolute_path = ignite_path .. "/" .. file
+    vim.cmd.luafile(absolute_path)
+  end
 end
 
 return M

@@ -1,8 +1,5 @@
 return {
   "lukas-reineke/indent-blankline.nvim",
-  -- init = function()
-  --    require("core.utils").lazy_load "indent-blankline.nvim"
-  -- end,
   opts = {
     enabled = true,
     exclude = {

@@ -139,7 +139,7 @@ M.tabufline = {
       "Goto next tab",
     },
 
-    ["<leader>l"] = {
+    ["<leader>ll"] = {
       "<Cmd>tabprev<CR>",
       "Goto next tab",
     },

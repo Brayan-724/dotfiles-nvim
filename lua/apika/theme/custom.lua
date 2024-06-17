@@ -48,19 +48,6 @@ local highlights = {
   NoiceCmdlinePopupBorderSearch = { fg = colors.baby_pink, bg = colors.term_background },
   NoiceCmdlinePopupTitle = { fg = colors.nebula11, bg = colors.term_background },
 
-  NvimTreeCursorLine = { link = "CursorLine" },
-  NvimTreeFolderIcon = { fg = colors.nebula11 },
-  NvimTreeFolderName = { fg = colors.nebula11 },
-  NvimTreeFolderNew = { fg = colors.nebula11 },
-  NvimTreeGitNew = { fg = colors.yellow },
-  NvimTreeGitMerge = { fg = colors.yellow },
-  NvimTreeGitDirty = { fg = colors.yellow },
-  NvimTreeGitDeleted = { fg = colors.red },
-  NvimTreeIndentMarker = { fg = colors.dark_purple },
-  NvimTreeNormal = { fg = colors.purple, bg = colors.term_background },
-  NvimTreeNormalNC = { link = "NvimTreeNormal" },
-  NvimTreeOpenedFolderName = { fg = colors.nebula11, bold = true },
-
   TelescopeBorder = { fg = colors.baby_pink },
 
   WhichKeyFloat = { fg = colors.light_grey, bg = colors.term_background },
