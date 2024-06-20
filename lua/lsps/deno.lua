@@ -1,7 +1,8 @@
-local lsp_utils = require "apika.lsp"
+local lspconfig = require "lspconfig"
 
-lsp_utils.setup("denols", {
-  root_dir = lsp_utils.lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
+return {
+  "denols",
+  root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
   settings = {
     deno = {
       enable = true,
@@ -14,4 +15,4 @@ lsp_utils.setup("denols", {
       },
     },
   },
-})
+}

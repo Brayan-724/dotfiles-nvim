@@ -18,49 +18,53 @@ local function is_activewin()
 end
 
 local M = {}
+local H = {}
 
-M.modes = {
-  ["n"] = { "󰋜", "St_NormalMode" },
-  ["no"] = { "󰋜", "St_NormalMode" },
-  ["nov"] = { "󰋜", "St_NormalMode" },
-  ["noV"] = { "󰋜", "St_NormalMode" },
-  ["noCTRL-V"] = { "󰋜", "St_NormalMode" },
-  ["niI"] = { "󰋜 i", "St_NormalMode" },
-  ["niR"] = { "󰋜 r", "St_NormalMode" },
-  ["niV"] = { "󰋜 v", "St_NormalMode" },
-  ["nt"] = { "󰋜 ", "St_NTerminalMode" },
-  ["ntT"] = { "󰋜 ", "St_NTerminalMode" },
+H.modes = {
+  ["c"] = { "", "Command" },
+  ["cv"] = { "", "Command" },
+  ["ce"] = { "", "Command" },
 
-  ["v"] = { "󰈈", "St_VisualMode" },
-  ["vs"] = { "󰈈 (Ctrl O)", "St_VisualMode" },
-  ["V"] = { "󰈈", "St_VisualMode" },
-  ["Vs"] = { "󰈈", "St_VisualMode" },
-  [""] = { "󰈈", "St_VisualMode" },
+  ["r"] = { "󰛔", "Confirm" },
+  ["rm"] = { "MORE", "Confirm" },
+  ["r?"] = { "", "Confirm" },
+  ["x"] = { "", "Confirm" },
 
-  ["i"] = { "󰏫", "St_InsertMode" },
-  ["ic"] = { "󰏫", "St_InsertMode" },
-  ["ix"] = { "󰏫", "St_InsertMode" },
+  ["i"] = { "󰏫", "Insert" },
+  ["ic"] = { "󰏫", "Insert" },
+  ["ix"] = { "󰏫", "Insert" },
 
-  ["t"] = { "", "St_TerminalMode" },
+  ["n"] = { "󰋜", "Normal" },
+  ["no"] = { "󰋜", "Normal" },
+  ["nov"] = { "󰋜", "Normal" },
+  ["noV"] = { "󰋜", "Normal" },
+  ["noCTRL-V"] = { "󰋜", "Normal" },
+  ["niI"] = { "󰋜 i", "Normal" },
+  ["niR"] = { "󰋜 r", "Normal" },
+  ["niV"] = { "󰋜 v", "Normal" },
 
-  ["R"] = { "", "St_ReplaceMode" },
-  ["Rc"] = { " (Rc)", "St_ReplaceMode" },
-  ["Rx"] = { "", "St_ReplaceMode" },
-  ["Rv"] = { "", "St_ReplaceMode" },
-  ["Rvc"] = { "", "St_ReplaceMode" },
-  ["Rvx"] = { "", "St_ReplaceMode" },
+  ["nt"] = { "󰋜 ", "NTerminal" },
+  ["ntT"] = { "󰋜 ", "NTerminal" },
 
-  ["s"] = { "󰏫", "St_SelectMode" },
-  ["S"] = { "󰏫", "St_SelectMode" },
-  -- [""] = { "S-BLOCK", "St_SelectMode" },
-  ["c"] = { "", "St_CommandMode" },
-  ["cv"] = { "", "St_CommandMode" },
-  ["ce"] = { "", "St_CommandMode" },
-  ["r"] = { "󰛔", "St_ConfirmMode" },
-  ["rm"] = { "MORE", "St_ConfirmMode" },
-  ["r?"] = { "", "St_ConfirmMode" },
-  ["x"] = { "", "St_ConfirmMode" },
-  ["!"] = { "", "St_TerminalMode" },
+  ["R"] = { "", "Replace" },
+  ["Rc"] = { " (Rc)", "Replace" },
+  ["Rx"] = { "", "Replace" },
+  ["Rv"] = { "", "Replace" },
+  ["Rvc"] = { "", "Replace" },
+  ["Rvx"] = { "", "Replace" },
+
+  ["s"] = { "󰏫", "Select" },
+  ["S"] = { "󰏫", "Select" },
+  -- [""] = { "S-BLOCK", "Select" },
+
+  ["t"] = { "", "Terminal" },
+  ["!"] = { "", "Terminal" },
+
+  ["v"] = { "󰈈", "Visual" },
+  ["vs"] = { "󰈈 (Ctrl O)", "Visual" },
+  ["V"] = { "󰈈", "Visual" },
+  ["Vs"] = { "󰈈", "Visual" },
+  [""] = { "󰈈", "Visual" },
 }
 
 M.mode = function()
@@ -70,9 +74,9 @@ M.mode = function()
 
   local m = vim.api.nvim_get_mode().mode
 
-  local sep_l_hl = "%#" .. M.modes[m][2] .. "Sep#"
-  local icon_hl = "%#" .. M.modes[m][2] .. "#"
-  local icon = M.modes[m][1]
+  local sep_l_hl = "%#" .. H.modes[m][2] .. "Sep#"
+  local icon_hl = "%#" .. H.modes[m][2] .. "#"
+  local icon = H.modes[m][1]
 
   return sep_l_hl .. separators.left .. icon_hl .. icon .. sep_l_hl .. separators.right .. " "
 

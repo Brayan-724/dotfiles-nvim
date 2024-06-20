@@ -1,6 +1,5 @@
-local lsp_utils = require "apika.lsp"
-
-lsp_utils.setup("rust_analyzer", {
+return {
+  "rust_analyzer",
   settings = {
     ["rust-analyzer"] = {
       assist = {
@@ -63,7 +62,6 @@ lsp_utils.setup("rust_analyzer", {
           ["tokio"] = { "main" },
         },
       },
-
     },
   },
-})
+}

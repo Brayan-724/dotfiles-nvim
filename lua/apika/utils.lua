@@ -99,7 +99,10 @@ function M.normalize_mapping(mappings)
 
   for mode, keybinds in pairs(mappings) do
     for keybind, mapping_info in pairs(keybinds) do
-      if keybind == 1 then 
+      if keybind == 1 then
+        vim.schedule(function()
+          print(keybind, mapping_info)
+        end)
         out.master = keybind
         goto continue
       end
@@ -118,7 +121,7 @@ function M.normalize_mapping(mappings)
         mode = mode,
         keybind = keybind,
         action = action,
-        opts = opts or {}
+        opts = opts or {},
       })
     end
 
@@ -155,7 +158,7 @@ function M.keymaps_to_lazy(mappings)
       keymap.keybind,
       keymap.action,
       mode = keymap.mode,
-      desc = keymap.opts.desc
+      desc = keymap.opts.desc,
     }
 
     local opts = keymap.opts

@@ -1,6 +1,5 @@
-local lsp_utils = require "apika.lsp"
-
-lsp_utils.setup("lua_ls", {
+return {
+  "lua_ls",
   settings = {
     Lua = {
       diagnostics = {
@@ -18,4 +17,4 @@ lsp_utils.setup("lua_ls", {
       },
     },
   },
-})
+}

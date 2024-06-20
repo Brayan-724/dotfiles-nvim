@@ -1,6 +1,9 @@
 -- require("apika.plugins").setup()
 local utils = require "apika.utils"
 
+---@param self string
+---@param suffix string
+---@return boolean
 function string:endswith(suffix)
   return self:sub(-#suffix) == suffix
 end
@@ -23,14 +26,15 @@ for file, filetype in utils.scan_dir_nested(plugins_path) do
     goto continue
   end
 
-  if file:endswith "init.lua" then
+  if file:endswith "/init.lua" then
     ---@type string
     local plugin = last_dir[#last_dir]
 
     -- vim.notify("Loading: " .. plugin, vim.log.levels.TRACE)
 
-    local require_ = function(s) return dofile(plugin .. "/" .. s .. ".lua") end
-
+    local require_ = function(s)
+      return dofile(plugin .. "/" .. s .. ".lua")
+    end
 
     local plugin_config = require_ "init"
     local plugin_name = plugin_config.name or plugin_config[1] or plugin
@@ -45,15 +49,18 @@ for file, filetype in utils.scan_dir_nested(plugins_path) do
           error("plugin " .. plugin_name .. " doesn't have 'name' field")
         end
 
-        plugin_config.config = function(plugin, opts)
+        plugin_config.config = function(p, opts)
           if type(config.before_config) == "function" then
-            config.before_config(plugin, opts)
+            config.before_config(p, opts)
           end
 
-          require(plugin_config.name).setup(opts)
+          local setup = require(plugin_config.name).setup
+          if type(setup) == "function" then
+            setup(opts)
+          end
 
           if type(config.after_config) == "function" then
-            config.after_config(plugin, opts)
+            config.after_config(p, opts)
           end
         end
       end
@@ -77,14 +84,14 @@ for file, filetype in utils.scan_dir_nested(plugins_path) do
 
       plugin_config.keys = utils.keymaps_to_lazy(mappings)
 
-      local has_wk, wk = pcall(require, "which-key") 
+      local has_wk, wk = pcall(require, "which-key")
       if has_wk then
         if mappings.master then
-          wk.register({ [mappings.master] = { name = plugin_name } })
+          wk.register { [mappings.master] = { name = plugin_name } }
         end
       end
-    elseif mappings ~= nil and mappings:find("No such file", 0, true) == nil then
-      error("[Error loading " .. plugin_name .. "] " .. mappings)
+    elseif mapping ~= nil and mapping:find("No such file", 0, true) == nil then
+      error("[Error loading " .. plugin_name .. "] " .. mapping)
     end
 
     local has_theme, theme = pcall(require_, "theme")
@@ -99,13 +106,15 @@ for file, filetype in utils.scan_dir_nested(plugins_path) do
     goto continue
   end
 
-  if file:endswith "theme.lua" then
+  if file:endswith "/theme.lua" then
     ---@type string
     local plugin = last_dir[#last_dir]
 
     -- vim.notify("Loading Theme: " .. plugin, vim.log.levels.TRACE)
 
-    local require_ = function(s) return dofile(plugin .. "/" .. s .. ".lua") end
+    local require_ = function(s)
+      return dofile(plugin .. "/" .. s .. ".lua")
+    end
 
     local has_theme, theme = pcall(require_, "theme")
 
