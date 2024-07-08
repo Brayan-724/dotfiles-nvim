@@ -2,11 +2,11 @@ return {
   definition = {
     keys = {
       close = "q",
-      edit = "<C-i>o",
-      quit = "<C-i>q",
-      split = "<C-i>h",
-      tabe = "<C-i>t",
-      vsplit = "<C-i>v",
+      edit = "<leader>wo",
+      quit = "<leader>wq",
+      split = "<leader>wh",
+      tabe = "<leader>wt",
+      vsplit = "<leader>wv",
     },
   },
   symbol_in_winbar = {
@@ -20,15 +20,11 @@ return {
   },
   lightbulb = {
     enable = false,
-    sign = false,
-    virtual_text = false,
     enable_in_insert = false,
   },
   implement = {
-    enable = true,
+    enable = false,
     sign = false,
-    lang = { "lua" },
-    virtual_text = true,
-    priority = 100,
+    virtual_text = false,
   },
 }

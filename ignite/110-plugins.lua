@@ -13,7 +13,7 @@ local plugins_path = lua_config .. "/plugins"
 
 local plugins = {}
 
-local last_dir = {}
+local last_dir = { plugins_path }
 
 for file, filetype in utils.scan_dir_nested(plugins_path) do
   if filetype == "IGNORE THIS" then
@@ -26,15 +26,15 @@ for file, filetype in utils.scan_dir_nested(plugins_path) do
     goto continue
   end
 
+  ---@type string
+  local plugin = last_dir[#last_dir]
+
+  local require_ = function(s)
+    return dofile(plugin .. "/" .. s .. ".lua")
+  end
+
   if file:endswith "/init.lua" then
-    ---@type string
-    local plugin = last_dir[#last_dir]
-
     -- vim.notify("Loading: " .. plugin, vim.log.levels.TRACE)
-
-    local require_ = function(s)
-      return dofile(plugin .. "/" .. s .. ".lua")
-    end
 
     local plugin_config = require_ "init"
     local plugin_name = plugin_config.name or plugin_config[1] or plugin
@@ -94,34 +94,19 @@ for file, filetype in utils.scan_dir_nested(plugins_path) do
       error("[Error loading " .. plugin_name .. "] " .. mapping)
     end
 
-    local has_theme, theme = pcall(require_, "theme")
-
-    if has_theme then
-      utils.set_highlights(theme)
-    elseif theme:find("No such file", 0, true) == nil then
-      error("[Error loading " .. plugin_name .. "] " .. theme)
-    end
-
     table.insert(plugins, plugin_config)
     goto continue
   end
 
   if file:endswith "/theme.lua" then
-    ---@type string
-    local plugin = last_dir[#last_dir]
-
     -- vim.notify("Loading Theme: " .. plugin, vim.log.levels.TRACE)
-
-    local require_ = function(s)
-      return dofile(plugin .. "/" .. s .. ".lua")
-    end
 
     local has_theme, theme = pcall(require_, "theme")
 
     if has_theme then
       utils.set_highlights(theme)
     elseif theme:find("No such file", 0, true) == nil then
-      error("[Error loading " .. plugin_name .. "] " .. theme)
+      error("[Error loading " .. plugin .. "] " .. theme)
     end
   end
 

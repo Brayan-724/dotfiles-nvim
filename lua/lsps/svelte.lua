@@ -1,1 +1,3 @@
-return { "svelte" }
+return {
+  "svelte"
+}

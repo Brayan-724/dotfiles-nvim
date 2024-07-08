@@ -1,1 +1,1 @@
-return { "yamlls" }
+return { "yamlls", opts = {} }

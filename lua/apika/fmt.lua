@@ -8,6 +8,10 @@ function M.typescript()
   vim.cmd "!deno fmt %"
 end
 
+function M.typescriptreact()
+  vim.cmd "!deno fmt %"
+end
+
 function M.astro()
   vim.cmd "!prettier --plugin prettier-plugin-astro --write %"
 end

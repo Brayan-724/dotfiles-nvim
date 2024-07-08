@@ -7,3 +7,5 @@
 lazy-lock.json
 after
 **/.DS_Store
+
+/servers.json

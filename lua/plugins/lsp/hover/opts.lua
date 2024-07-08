@@ -1,9 +1,9 @@
 return {
   init = function()
-    -- Require providers
+    -- Hover Providers
     require "hover.providers.lsp"
     require('hover.providers.gh')
-    -- require('hover.providers.gh_user')
+    require('hover.providers.gh_user')
     -- require('hover.providers.jira')
     require('hover.providers.man')
     require('hover.providers.dictionary')
@@ -13,7 +13,7 @@ return {
   },
   -- Whether the contents of a currently open hover window should be moved
   -- to a :h preview-window when pressing the hover keymap.
-  preview_window = false,
+  preview_window = true,
   title = true,
   mouse_providers = {
     "LSP",

@@ -1,0 +1,6 @@
+return function(_, opts)
+  local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+  parser_config.aml3 = require("plugins.code.langs.aml3.ts")
+
+  require("nvim-treesitter.configs").setup(opts)
+end

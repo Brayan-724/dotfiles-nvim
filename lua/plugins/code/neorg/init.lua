@@ -1,7 +1,13 @@
+vim.filetype.add {
+  extension = {
+    org = "norg"
+  }
+}
+
 return {
   "nvim-neorg/neorg",
+  ft = "norg",
   dependencies = { "luarocks.nvim" },
-  lazy = false,
   version = "v8.4.1",
   opts = {
     load = {

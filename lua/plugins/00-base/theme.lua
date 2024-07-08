@@ -18,12 +18,16 @@ return {
   Typedef = { fg = colors.purple },
   Variable = { link = "Identifier" },
 
+  ["@builtin"] = { fg = colors.purple },
   ["@field"] = { fg = colors.astral1 },
   ["@parameter"] = { link = "Variable" },
   ["@string"] = { fg = colors.darkgreen },
-  ["@type.definition"] = { link = "Keyword" },
   ["@variable"] = { link = "Variable" },
+
   ["@lsp.type.variable"] = { link = "Variable" },
+  ["@tag.builtin"] = { link="Special" },
+  ["@type.builtin"] = { link = "@builtin" },
+  ["@type.definition"] = { link = "Keyword" },
 
   ColorColumn = { bg = colors.term_background, fg = colors.white },
   CursorColumn = { link = "ColorColumn" },

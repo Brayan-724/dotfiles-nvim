@@ -16,6 +16,10 @@ M.general = {
   },
 
   n = {
+    ["<leader>ts"] = {
+      "<cmd>ToggleServer<CR>",
+      "Toggle Server",
+    },
     ["<leader>nd"] = {
       "<cmd> NoiceDismiss <CR>",
       "Dismiss Noice notifications",
@@ -210,15 +214,6 @@ M.lspconfig = {
       "LSP code action",
     },
 
-    -- NOTE: Use Telescope instead
-    --
-    -- ["gr"] = {
-    --   function()
-    --     vim.lsp.buf.references()
-    --   end,
-    --   "LSP references",
-    -- },
-
     ["<leader>lf"] = {
       function()
         vim.diagnostic.open_float { border = "rounded" }
@@ -239,15 +234,6 @@ M.lspconfig = {
       end,
       "Goto next",
     },
-
-    -- NOTE: Use Telescope instead
-    --
-    -- ["<leader>q"] = {
-    --   function()
-    --     vim.diagnostic.setloclist()
-    --   end,
-    --   "Diagnostic setloclist",
-    -- },
 
     ["<leader>wa"] = {
       function()
@@ -283,16 +269,6 @@ M.lspconfig = {
   },
 }
 
-M.nvimtree = {
-  n = {
-    -- toggle
-    ["<C-n>"] = { "<cmd> NvimTreeToggle <CR>", "Toggle nvimtree" },
-
-    -- focus
-    ["<leader>e"] = { "<cmd> NvimTreeFocus <CR>", "Focus nvimtree" },
-  },
-}
-
 M.blankline = {
   n = {
     ["<leader>cc"] = {
@@ -310,6 +286,5 @@ return function()
 
   require("apika.utils").set_mapping(M.blankline)
   require("apika.utils").set_mapping(M.lspconfig)
-  require("apika.utils").set_mapping(M.nvimtree)
   require("apika.utils").set_mapping(M.tabufline)
 end

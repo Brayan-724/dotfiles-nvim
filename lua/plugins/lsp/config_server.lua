@@ -1,4 +1,5 @@
 local lspconfig = require "lspconfig"
+local lspconfig_util = require "lspconfig.util"
 
 local function on_attach(client)
   client.server_capabilities.documentFormattingProvider = false
@@ -31,7 +32,7 @@ capabilities.textDocument.completion.completionItem = {
   },
 }
 
-lspconfig.util.default_config = vim.tbl_deep_extend("force", lspconfig.util.default_config, {
+lspconfig_util.default_config = vim.tbl_deep_extend("force", lspconfig.util.default_config, {
   on_attach = on_attach,
   capabilities = capabilities,
 })

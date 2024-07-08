@@ -7,5 +7,5 @@ return {
     local has_deno = lspconfig.util.root_pattern("deno.json", "deno.jsonc")
     return not has_deno(fname) and has_package(fname)
   end,
-  single_file_support = true,
+  single_file_support = false,
 }
