@@ -5,19 +5,19 @@ function M.rust()
 end
 
 function M.typescript()
-  vim.cmd "!deno fmt %"
+  vim.cmd "!deno fmt \"%\""
 end
 
 function M.typescriptreact()
-  vim.cmd "!deno fmt %"
+  vim.cmd "!deno fmt \"%\""
 end
 
 function M.astro()
-  vim.cmd "!prettier --plugin prettier-plugin-astro --write %"
+  vim.cmd "!prettier --plugin prettier-plugin-astro --write \"%\""
 end
 
 function M.svelte()
-  vim.cmd "!prettier --plugin prettier-plugin-svelte --write %"
+  vim.cmd "!prettier --plugin prettier-plugin-svelte --write \"%\""
 end
 
 function M.run_filetype(filetype)

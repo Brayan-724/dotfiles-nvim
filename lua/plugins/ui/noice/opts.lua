@@ -29,6 +29,16 @@ return {
       },
       opts = { skip = true },
     },
+
+    -- hide reemove messages
+    {
+      filter = {
+        event = "notify",
+        kind = "",
+        find = "was properly removed",
+      },
+      opts = { skip = true },
+    },
   },
 
   cmdline = {

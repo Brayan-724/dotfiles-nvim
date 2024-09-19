@@ -1,11 +1,17 @@
 return {
+  actions = {
+    open_file = {
+      resize_window = true,
+    },
+  },
+
   filters = {
     dotfiles = false,
   },
   disable_netrw = true,
   hijack_netrw = true,
   hijack_cursor = true,
-  hijack_unnamed_buffer_when_opening = false,
+  hijack_unnamed_buffer_when_opening = true,
   sync_root_with_cwd = true,
   update_focused_file = {
     enable = true,
@@ -15,7 +21,7 @@ return {
     adaptive_size = false,
     side = "right",
     width = 30,
-    preserve_window_proportions = true,
+    preserve_window_proportions = false,
   },
 
   git = {
@@ -25,10 +31,10 @@ return {
   filesystem_watchers = {
     enable = true,
   },
-  actions = {
-    open_file = {
-      resize_window = true,
-    },
+
+  notify = {
+    threshold = vim.log.levels.WARN,
+    absolute_path = false,
   },
 
   renderer = {

@@ -1,4 +1,4 @@
 return {
-  dir = "~/gh/lsps-manager/",
+  "lsproule/lsps-manager",
   name = "lsp-manager",
 }

@@ -49,7 +49,7 @@ return function()
       },
     },
 
-    extensions_list = { "fzf", "zoxide", "noice" },
+    extensions_list = { "zoxide", "noice" },
     extensions = {
       fzf = {
         fuzzy = true,

@@ -6,5 +6,5 @@ for _, file in pairs(vim.fn.readdir(ignite_path)) do
   vim.cmd.luafile(absolute_path)
 end
 
--- require "apika.config.mappings"()
+require "apika.config.mappings"()
 -- require "apika.theme.custom"
