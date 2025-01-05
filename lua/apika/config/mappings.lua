@@ -40,14 +40,21 @@ M.general = {
     ["<C-j>"] = { "<C-w>j", "Window down" },
     ["<C-k>"] = { "<C-w>k", "Window up" },
 
+    -- Move line
+    ["<M-j>"] = { '<CMD>m +1<CR>==', "Move line down" },
+    ["<M-k>"] = { '<CMD>m -2<CR>==', "Move line up" },
+
     -- save
     ["<C-s>"] = { "<cmd> w <CR>", "Save file" },
 
     -- Copy all
     ["<C-c>"] = { "<cmd> %y+ <CR>", "Copy whole file" },
 
+    -- Select all
+    ["<C-a>"] = { "ggVG", "Copy whole file" },
+
     -- line numbers
-    -- ["<leader>n"] = { "<cmd> set nu! <CR>", "Toggle line number" },
+    ["<leader>nt"] = { "<cmd> set nu! <CR>", "Toggle line number" },
     ["<leader>rn"] = { "<cmd> set rnu! <CR>", "Toggle relative number" },
 
     -- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
@@ -61,7 +68,6 @@ M.general = {
 
     -- new buffer
     ["<leader>b"] = { "<cmd> enew <CR>", "New buffer" },
-    ["<leader>ch"] = { "<cmd> NvCheatsheet <CR>", "Mapping cheatsheet" },
 
     [";"] = { ":", "Enter command mode", opts = { nowait = true } },
     ["gr"] = {
@@ -114,6 +120,9 @@ M.general = {
   x = {
     ["j"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', "Move down", opts = { expr = true } },
     ["k"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', "Move up", opts = { expr = true } },
+
+    ["<M-j>"] = { ':m \'>+1<CR>gv=gv', "Move line down" },
+    ["<M-k>"] = { ':m \'<-2<CR>gv=gv', "Move line up" },
     -- Don't copy the replaced text after pasting in visual mode
     -- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
     ["p"] = { 'p:let @+=@0<CR>:let @"=@0<CR>', "Dont copy replaced text", opts = { silent = true } },
