@@ -18,7 +18,7 @@ local plugins = {}
 
 local last_dir = { plugins_path }
 
-local has_which_key, which_key = pcall(require, "which-key")
+-- local has_which_key, which_key = pcall(require, "which-key")
 
 for dir, filetype in utils.scan_dir_nested(plugins_path) do
   if filetype == "IGNORE THIS" then
@@ -115,17 +115,16 @@ for dir, filetype in utils.scan_dir_nested(plugins_path) do
     end
 
     table.insert(plugins, plugin_config)
-    goto continue
   end
 
-  if has_mappings and mappings.master and has_which_key then
-    which_key.register { [mappings.master] = { name = plugin_name } }
-  end
+  -- if has_mappings and mappings.master and has_which_key then
+  --   which_key.register { [mappings.master] = { name = plugin_name } }
+  -- end
 
   local has_theme, theme = require_opt "theme"
 
   if has_theme then
-    -- vim.notify("Loading Theme: " .. plugin, vim.log.levels.TRACE)
+    vim.notify("Loading Theme: " .. plugin, vim.log.levels.TRACE)
     utils.set_highlights(theme)
   end
 
