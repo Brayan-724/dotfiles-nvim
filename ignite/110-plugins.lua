@@ -8,38 +8,80 @@ function string:endswith(suffix)
   return self:sub(-#suffix) == suffix
 end
 
-local lua_config = vim.fn.stdpath "config" .. "/lua"
-local plugins_path = lua_config .. "/plugins"
+function string:startswith(prefix)
+  return self:sub(1, #prefix) == prefix
+end
+
+local plugins_path = vim.fn.stdpath "config" .. "/lua" .. "/plugins"
 
 local plugins = {}
 
 local last_dir = { plugins_path }
 
-for file, filetype in utils.scan_dir_nested(plugins_path) do
+local has_which_key, which_key = pcall(require, "which-key")
+
+for dir, filetype in utils.scan_dir_nested(plugins_path) do
   if filetype == "IGNORE THIS" then
     table.remove(last_dir, #last_dir)
     goto continue
   end
 
-  if filetype == "directory" then
-    table.insert(last_dir, file)
+  if filetype == "file" then
+    goto continue
+  end
+  -- filetype = "directory"
+
+  table.insert(last_dir, dir)
+
+  ---@type string
+  local plugin = dir
+  local plugin_name = plugin
+
+  -- Gets last part of the path
+  local starts, ends = plugin_name:find("/[^/]+$")
+  if starts ~= nil then
+    plugin_name = plugin_name:sub(starts + 1, ends)
+  end
+
+  -- Ignore plugins with prefix "_"
+  if plugin_name:startswith "_" then
+    vim.notify_once("ignoring " .. plugin)
     goto continue
   end
 
-  ---@type string
-  local plugin = last_dir[#last_dir]
-
+  -- Import relative to the plugin
   local require_ = function(s)
     return dofile(plugin .. "/" .. s .. ".lua")
   end
 
-  if file:endswith "/init.lua" then
+  local require_opt = function(s)
+    local has_file, content = pcall(require_, s)
+
+    if has_file then
+      return true, content
+    elseif content:find("No such file", 0, true) == nil then
+      error("[Error loading " .. plugin_name .. "] " .. content)
+    end
+
+    return false, null
+  end
+
+
+  local has_mappings, mappings = require_opt "mappings"
+
+  if has_mappings then
+    mappings = utils.normalize_mapping(mappings)
+    utils.set_mappings_normalized(mappings)
+  end
+
+  local has_plugin_config, plugin_config = require_opt "init"
+
+  if has_plugin_config then
     -- vim.notify("Loading: " .. plugin, vim.log.levels.TRACE)
 
-    local plugin_config = require_ "init"
-    local plugin_name = plugin_config.name or plugin_config[1] or plugin
+    plugin_name = plugin_config.name or plugin_name
 
-    local has_config, config = pcall(require_, "config")
+    local has_config, config = require_opt "config"
 
     if has_config then
       if type(config) == "function" then
@@ -64,50 +106,27 @@ for file, filetype in utils.scan_dir_nested(plugins_path) do
           end
         end
       end
-    elseif config:find("No such file", 0, true) == nil then
-      error("[Error loading " .. plugin_name .. "] " .. config)
     end
 
-    local has_opts, opts = pcall(require_, "opts")
+    local has_opts, opts = require_opt("opts")
 
     if has_opts then
       plugin_config.opts = opts
-    elseif opts:find("No such file", 0, true) == nil then
-      error("[Error loading " .. plugin_name .. "] " .. opts)
-    end
-
-    local has_mapping, mapping = pcall(require_, "mappings")
-
-    if has_mapping then
-      local mappings = utils.normalize_mapping(mapping)
-      utils.set_mappings_normalized(mappings)
-
-      plugin_config.keys = utils.keymaps_to_lazy(mappings)
-
-      local has_wk, wk = pcall(require, "which-key")
-      if has_wk then
-        if mappings.master then
-          wk.register { [mappings.master] = { name = plugin_name } }
-        end
-      end
-    elseif mapping ~= nil and mapping:find("No such file", 0, true) == nil then
-      error("[Error loading " .. plugin_name .. "] " .. mapping)
     end
 
     table.insert(plugins, plugin_config)
     goto continue
   end
 
-  if file:endswith "/theme.lua" then
+  if has_mappings and mappings.master and has_which_key then
+    which_key.register { [mappings.master] = { name = plugin_name } }
+  end
+
+  local has_theme, theme = require_opt "theme"
+
+  if has_theme then
     -- vim.notify("Loading Theme: " .. plugin, vim.log.levels.TRACE)
-
-    local has_theme, theme = pcall(require_, "theme")
-
-    if has_theme then
-      utils.set_highlights(theme)
-    elseif theme:find("No such file", 0, true) == nil then
-      error("[Error loading " .. plugin .. "] " .. theme)
-    end
+    utils.set_highlights(theme)
   end
 
   ::continue::
