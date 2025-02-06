@@ -42,14 +42,22 @@ return {
         prefix = "self",
       },
       inlayHints = {
+        chainingHints = {
+          enable = true,
+        },
+        closureReturnTypeHints = {
+          enable = false,
+        },
         expressionAdjustmentHints = {
-          enabled = true,
+          enable = true,
+          hideOutsideUnsafe = true,
         },
         parameterHints = {
-          enabled = false,
+          enable = false,
         },
+        renderColons = false,
         typeHints = {
-          enabled = false,
+          enable = false,
         },
       },
       lru = {
