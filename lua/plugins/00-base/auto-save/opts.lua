@@ -2,10 +2,7 @@ return {
   trigger_events = {
     immediate_save = { "InsertLeave", "TextChanged" },
     defer_save = {},
-    cancel_defered_save = {},
-  },
-  execution_message = {
-    enabled = false,
+    cancel_deferred_save = {},
   },
   callbacks = {
     after_saving = function()

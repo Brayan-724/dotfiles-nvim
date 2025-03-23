@@ -50,8 +50,8 @@ local highlights = {
 
   TelescopeBorder = { fg = colors.baby_pink },
 
-  WhichKeyFloat = { fg = colors.light_grey, bg = colors.term_background },
-  WhichKeySeparator = { fg = colors.red, bg = colors.term_background },
+  WhichKeyFloat = { fg = colors.light_grey, bg = colors.float_background },
+  WhichKeySeparator = { fg = colors.red, bg = colors.float_background },
   WhichKeyValue = { fg = colors.light_grey },
 }
 

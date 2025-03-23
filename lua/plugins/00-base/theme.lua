@@ -5,11 +5,11 @@ return {
   Constant = { fg = colors.dark_purple },
   Conditional = { fg = colors.green },
   Define = { fg = colors.nebula11 },
-  FloatBorder = { fg = colors.baby_pink, bg = colors.term_background },
+  FloatBorder = { fg = colors.baby_pink, bg = colors.float_background },
   Identifier = { fg = colors.red },
   Keyword = { fg = colors.nebula11 },
   Normal = { bg = colors.term_background },
-  NormalFloat = { bg = colors.term_background },
+  NormalFloat = { bg = colors.float_background },
   Macro = { fg = colors.dark_purple },
   PreProc = { fg = colors.purple },
   Repeat = { link = "Keyword" },
@@ -52,10 +52,11 @@ return {
   NoiceCmdlinePopupBorderSearch = { fg = colors.baby_pink, bg = colors.term_background },
   NoiceCmdlinePopupTitle = { fg = colors.nebula11, bg = colors.term_background },
 
-  TelescopeBorder = { fg = colors.baby_pink },
+  TelescopeNormal = { bg = colors.float_background },
+  TelescopeBorder = { fg = colors.baby_pink, bg = colors.float_background },
 
-  WhichKeyFloat = { fg = colors.light_grey, bg = colors.term_background },
-  WhichKeySeparator = { fg = colors.red, bg = colors.term_background },
+  WhichKeyFloat = { fg = colors.light_grey, bg = colors.float_background },
+  WhichKeySeparator = { fg = colors.red, bg = colors.float_background },
   WhichKeyValue = { fg = colors.light_grey },
 
   DiffAdd = { fg = colors.red, bg = colors.term_background },

@@ -24,8 +24,8 @@ return {
        d88888888     88"""""    Y8   8P     88""""Yb,          d88888888
  __   ,8"     88     88         `8, ,8'     88     "8b   __   ,8"     88
 dP"  ,8P      Y8     88    8888  "8,8"      88      `8i dP"  ,8P      Y8
-Yb,_,dP       `8b,   88    `8b,  ,d8b,      88       Yb,Yb,_,dP       `8b,
- "Y8P"         `Y8   88      "Y88P" "Y8     88        Y8 "Y8P"         `Y8
+Yb,_,dP        `8b,   88    `8b,  ,d8b,      88       Yb,Yb,_,dP       `8b,
+ "Y8P"          `Y8   88      "Y88P" "Y8     88        Y8 "Y8P"         `Y8
           ]],
     footer = {  "", "Apika's distro" }
   },

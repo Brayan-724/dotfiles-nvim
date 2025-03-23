@@ -44,7 +44,8 @@ return {
   folder_bg = "#61afef",
 
   -- Custom
-  term_background = "#100e23",
+  term_background = "NONE",
+  float_background = "#100e23",
   space0 = "#100e23",
   space1 = "#1e1c31",
   space2 = "#2d2b40",
