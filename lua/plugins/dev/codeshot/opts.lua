@@ -1,5 +1,5 @@
 return {
-  copy = "%c | xclip -selection clipboard -t image/png",
+  copy = "%c | wl-copy",
   silent = true,
   use_current_theme = true,
   author = "Apika Luca",

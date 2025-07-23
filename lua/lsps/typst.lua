@@ -1,4 +1,4 @@
 return {
-  "typst_lsp",
+  "tynimist",
   enabled = true,
 }

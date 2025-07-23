@@ -1,7 +1,7 @@
 local lspconfig = require "lspconfig"
 
 return {
-  "tsserver",
+  "ts_ls",
   root_dir = function(fname)
     local has_package = lspconfig.util.root_pattern "package.json"
     local has_deno = lspconfig.util.root_pattern("deno.json", "deno.jsonc")

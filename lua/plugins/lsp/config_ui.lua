@@ -1,6 +1,18 @@
 local function lspSymbol(name, icon)
+  local severity = vim.diagnostic.severity[string.upper(name)]
   local hl = "DiagnosticSign" .. name
-  vim.fn.sign_define(hl, { text = icon, numhl = hl, texthl = hl })
+
+  local function withSeverity(value)
+    return { [severity] = value }
+  end
+
+  vim.diagnostic.config {
+    signs = {
+      text = withSeverity(icon),
+      numhl = withSeverity(hl),
+      texthl = withSeverity(hl),
+    }
+  }
 end
 
 lspSymbol("Error", "󰅙")

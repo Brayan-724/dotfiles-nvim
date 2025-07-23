@@ -1,4 +1,4 @@
 return {
-  "lsproule/lsps-manager",
+  "Brayan-724/lsps-manager",
   name = "lsp-manager",
 }

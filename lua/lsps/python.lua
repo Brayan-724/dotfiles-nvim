@@ -1,1 +1,1 @@
-return { "ruff_lsp" }
+return { "ruff" }
