@@ -46,7 +46,7 @@ return {
 
     ["<leader>gb"] = {
       function()
-        package.loaded.gitsigns.blame_line()
+        require("gitsigns").blame_line()
       end,
       "blame line",
     },

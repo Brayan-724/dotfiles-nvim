@@ -16,14 +16,8 @@ M.general = {
   },
 
   n = {
-    ["<leader>ts"] = {
-      "<cmd>ToggleServer<CR>",
-      "Toggle Server",
-    },
-    ["<leader>nd"] = {
-      "<cmd> NoiceDismiss <CR>",
-      "Dismiss Noice notifications",
-    },
+    ["<leader>ts"] = { "<cmd>ToggleServer<CR>", "Toggle Server" },
+    ["<leader>nd"] = { "<cmd> NoiceDismiss <CR>", "Dismiss Noice notifications" },
 
     -- close buff
     ["<leader>x"] = {
@@ -70,33 +64,10 @@ M.general = {
     ["<leader>b"] = { "<cmd> enew <CR>", "New buffer" },
 
     [";"] = { ":", "Enter command mode", opts = { nowait = true } },
-    ["gr"] = {
-      function()
-        vim.cmd "Telescope lsp_references"
-      end,
-      "Go to references",
-    },
-
-    ["gd"] = {
-      function()
-        vim.cmd "Telescope lsp_definitions"
-      end,
-      "Go to definitions",
-    },
-
-    ["<leader>q"] = {
-      function()
-        vim.cmd "Telescope diagnostics"
-      end,
-      "Go to definitions",
-    },
-
-    ["<leader>cd"] = {
-      function()
-        vim.cmd "Telescope zoxide list"
-      end,
-      "Go to definitions",
-    },
+    ["gr"] = { "<cmd>Telescope lsp_references<CR>", "Go to references", },
+    ["gd"] = { "<cmd>Telescope lsp_definitions<CR>", "Go to definitions", },
+    ["<leader>q"] = { "<cmd>Telescope diagnostics<CR>", "Go to diagnostics", },
+    ["<leader>cd"] = { "<cmd>Telescope zoxide list<CR>", "Open zoxide list", },
 
     ["<leader>fm"] = {
       function()
@@ -126,6 +97,7 @@ M.general = {
     -- Don't copy the replaced text after pasting in visual mode
     -- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
     ["p"] = { 'p:let @+=@0<CR>:let @"=@0<CR>', "Dont copy replaced text", opts = { silent = true } },
+    ["<C-p>"] = { 'p', "Copy replaced text", opts = { silent = true } },
   },
 }
 
@@ -147,15 +119,8 @@ M.tabufline = {
     },
 
     -- cycle through buffers
-    ["<leader>h"] = {
-      "<Cmd>tabnext<CR>",
-      "Goto next tab",
-    },
-
-    ["<leader>ll"] = {
-      "<Cmd>tabprev<CR>",
-      "Goto next tab",
-    },
+    ["<leader>h"] = { "<Cmd>tabnext<CR>", "Goto next tab"},
+    ["<leader>ll"] = { "<Cmd>tabprev<CR>", "Goto next tab"},
   },
 }
 
@@ -169,20 +134,8 @@ M.lspconfig = {
       "LSP declaration",
     },
 
-    ["gd"] = {
-      function()
-        -- vim.lsp.buf.definition()
-        vim.cmd "Lspsaga peek_definition"
-      end,
-      "LSP definition",
-    },
-
-    -- ["K"] = {
-    --   function()
-    --     vim.lsp.buf.hover()
-    --   end,
-    --   "LSP hover",
-    -- },
+    ["gd"] = { "<cmd>Lspsaga peek_definition<CR>", "LSP definition" },
+    ["K"] = { "<cmd>Lspsaga hover_doc<CR>", "LSP hover" },
 
     ["gi"] = {
       function()
@@ -198,51 +151,19 @@ M.lspconfig = {
       "LSP signature help",
     },
 
-    ["<leader>D"] = {
-      function()
-        -- vim.lsp.buf.type_definition()
-        vim.cmd "Lspsaga peek_type_definition"
-      end,
-      "LSP definition type",
-    },
+    ["<leader>D"] = { "<cmd>Lspsaga peek_type_definition<CR>", "LSP definition type" },
+    ["<leader>ra"] = { "<cmd>Lspsaga rename<CR>", "LSP rename" },
+    ["<leader>ca"] = { "<cmd>Lspsaga code_action<CR>", "LSP code action" },
 
-    ["<leader>ra"] = {
-      function()
-        -- require("apika.renamer").open()
-        vim.cmd "Lspsaga rename"
-      end,
-      "LSP rename",
-    },
+    -- ["<leader>lf"] = {
+    --   function()
+    --     vim.diagnostic.open_float { border = "rounded" }
+    --   end,
+    --   "Floating diagnostic",
+    -- },
 
-    ["<leader>ca"] = {
-      function()
-        -- vim.lsp.buf.code_action()
-        require("actions-preview").code_actions()
-        -- vim.cmd "Lspsaga code_action"
-      end,
-      "LSP code action",
-    },
-
-    ["<leader>lf"] = {
-      function()
-        vim.diagnostic.open_float { border = "rounded" }
-      end,
-      "Floating diagnostic",
-    },
-
-    ["[d"] = {
-      function()
-        vim.diagnostic.goto_prev { float = { border = "rounded" } }
-      end,
-      "Goto prev",
-    },
-
-    ["]d"] = {
-      function()
-        vim.diagnostic.goto_next { float = { border = "rounded" } }
-      end,
-      "Goto next",
-    },
+    ["[d"] = { "<cmd>Lspsaga diagnostic_jump_prev<CR>", "Goto prev" },
+    ["]d"] = { "<cmd>Lspsaga diagnostic_jump_next<CR>", "Goto next" },
 
     ["<leader>wa"] = {
       function()
@@ -267,33 +188,13 @@ M.lspconfig = {
   },
 
   v = {
-    ["<leader>ca"] = {
-      function()
-        -- vim.lsp.buf.code_action()
-        require("actions-preview").code_actions()
-        -- vim.cmd "Lspsaga code_action"
-      end,
-      "LSP code action",
-    },
-  },
-}
-
-M.blankline = {
-  n = {
-    ["<leader>cc"] = {
-      function()
-        vim.notify_once "Unimplemented: Jump to current context"
-      end,
-
-      "Jump to current context",
-    },
+    ["<leader>ca"] = { "<cmd>Lspsaga code_action<CR>", "LSP code action" },
   },
 }
 
 return function()
   require("apika.utils").set_mapping(M.general)
 
-  require("apika.utils").set_mapping(M.blankline)
   require("apika.utils").set_mapping(M.lspconfig)
   require("apika.utils").set_mapping(M.tabufline)
 end

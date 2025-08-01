@@ -1,30 +1,32 @@
-local function lspSymbol(name, icon)
-  local severity = vim.diagnostic.severity[string.upper(name)]
-  local hl = "DiagnosticSign" .. name
-
-  local function withSeverity(value)
-    return { [severity] = value }
-  end
-
-  vim.diagnostic.config {
-    signs = {
-      text = withSeverity(icon),
-      numhl = withSeverity(hl),
-      texthl = withSeverity(hl),
-    }
-  }
+local function severity(name)
+  return vim.diagnostic.severity[string.upper(name)]
 end
 
-lspSymbol("Error", "󰅙")
-lspSymbol("Info", "󰋼")
-lspSymbol("Hint", "󰌵")
-lspSymbol("Warn", "")
+local function hl(name)
+  return "DiagnosticSign" .. name
+end
+
+local signs_hl = {
+  [severity("Error")] = hl("Error"),
+  [severity("Info")] = hl("Info"),
+  [severity("Hint")] = hl("Hint"),
+  [severity("Warn")] = hl("Warn"),
+}
 
 vim.diagnostic.config {
   virtual_text = {
     prefix = "",
   },
-  signs = true,
+  signs = {
+    text = {
+      [severity("Error")] = "󰅙",
+      [severity("Info")] = "󰋼",
+      [severity("Hint")] = "󰌵",
+      [severity("Warn")] = "",
+    },
+    numhl = signs_hl,
+    texthl = signs_hl,
+  },
   underline = true,
   update_in_insert = true,
 }
