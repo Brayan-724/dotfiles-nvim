@@ -3,12 +3,7 @@ return {
     ["<leader>lf"] = {
       function () 
         if vim.diagnostic.config().virtual_text == false then
-          vim.diagnostic.config {
-            virtual_text = vim.g.old_virtual_text_state,
-            virtual_lines = false,
-          }
-          vim.g.old_virtual_text_state = nil
-          vim.api.nvim_del_autocmd(vim.b.remove_lsp_lines_autocmd)
+          vim.diagnostic.open_float { border = "rounded" }
         else
           vim.g.old_virtual_text_state = vim.diagnostic.config().virtual_text
           vim.diagnostic.config {
