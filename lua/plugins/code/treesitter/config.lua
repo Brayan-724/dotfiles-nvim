@@ -3,6 +3,7 @@ return function(_, opts)
     pattern = "TSUpdate",
     callback = function()
       local parser_config = require("nvim-treesitter.parsers")
+      parser_config.comment = require("plugins.code.langs.comments.ts")
       parser_config.aml3 = require("plugins.code.langs.aml3.ts")
       parser_config.edge = require("plugins.code.langs.edge.ts")
       parser_config.just = require("plugins.code.langs.just.ts")
