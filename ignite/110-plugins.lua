@@ -15,6 +15,7 @@ end
 local plugins_path = vim.fn.stdpath "config" .. "/lua" .. "/plugins"
 
 local plugins = {}
+local themes = {}
 
 local last_dir = { plugins_path }
 
@@ -121,14 +122,28 @@ for dir, filetype in utils.scan_dir_nested(plugins_path) do
   --   which_key.register { [mappings.master] = { name = plugin_name } }
   -- end
 
-  local has_theme, theme = require_opt "theme"
+  local function load_theme(first_time)
+    local has_theme, theme = require_opt "theme"
 
-  if has_theme then
-    vim.notify("Loading Theme: " .. plugin, vim.log.levels.TRACE)
-    utils.set_highlights(theme)
+    if has_theme then
+      if first_time then
+        table.insert(themes, load_theme)
+      end
+
+      vim.notify("Loading Theme: " .. plugin, vim.log.levels.TRACE)
+      utils.set_highlights(theme)
+    end
   end
+
+  load_theme(true)
 
   ::continue::
 end
+
+vim.api.nvim_create_user_command("ReloadThemes", function()
+  for i, reload_theme in ipairs(themes) do
+    reload_theme(false)
+  end
+end, { desc = "Reload defined themes" })
 
 require("lazy").setup(plugins)
