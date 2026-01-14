@@ -1,8 +1,9 @@
 local common = require "plugins.dev.compilemode.common"
 
 return {
-  before_config = function()
+  before_config = function(_, opts)
     common.load_lock()
+    vim.g.compilemode = opts
   end,
 
   after_config = function()
