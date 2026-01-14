@@ -1,5 +1,6 @@
 return {
-  "andweeb/presence.nvim",
-  name = "presence",
+  "vyfor/cord.nvim",
+  name = "cord",
+  build = ':Cord update',
   config = true
 }
