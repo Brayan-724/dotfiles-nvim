@@ -54,11 +54,13 @@ return function()
     -- default fields order i.e completion word + item.kind + item.kind icons
     fields = { "abbr", "kind", "menu" },
 
-    format = function(_, item)
+    format = function(entry, item)
       local icon = icons[item.kind] or ""
 
       icon = cmp_ui.lspkind_text and (" " .. icon .. " ") or icon
       item.kind = string.format("%s %s", icon, cmp_ui.lspkind_text and item.kind or "")
+
+      item = require("tailwindcss-colorizer-cmp").formatter(entry, item)
 
       return item
     end,
