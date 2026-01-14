@@ -1,4 +1,1 @@
-return {
-  "tynimist",
-  enabled = true,
-}
+return { "tinymist" }

@@ -5,6 +5,7 @@ return {
       assist = {
         importEnforceGranularity = true,
         importPrefix = "create",
+        preferSelf = true,
       },
       cache = {
         warmup = false,
@@ -28,6 +29,7 @@ return {
       },
       diagnostics = {
         enable = true,
+        disabled = { "inactive-code" },
         experimental = {
           enable = true,
         },
@@ -37,6 +39,7 @@ return {
           enable = true,
         },
         granularity = {
+          enforce = true,
           group = "module",
         },
         prefix = "self",
