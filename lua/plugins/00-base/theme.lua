@@ -24,6 +24,11 @@ return {
   ["@string"] = { fg = colors.darkgreen },
   ["@variable"] = { link = "Variable" },
 
+
+  ["@lsp.mod.static"] = { link = "Constant" },
+  ["@lsp.type.attributeBracket"] = { link = "Special" },
+  ["@lsp.type.modifier"] = { link = "Keyword" },
+  ["@lsp.type.typeParameter.java"] = { link = "Structure" },
   ["@lsp.type.variable"] = { link = "Variable" },
   ["@tag.builtin"] = { link="Special" },
   ["@type.builtin"] = { link = "@builtin" },
