@@ -16,6 +16,8 @@ M.general = {
   },
 
   n = {
+    ["<leader>G"] = { "80|", "Go to print width (80)" },
+
     ["<leader>ts"] = { "<cmd>ToggleServer<CR>", "Toggle Server" },
     ["<leader>nd"] = { "<cmd> NoiceDismiss <CR>", "Dismiss Noice notifications" },
 
