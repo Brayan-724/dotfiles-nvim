@@ -27,6 +27,7 @@ return {
 
   ["@lsp.mod.static"] = { link = "Constant" },
   ["@lsp.type.attributeBracket"] = { link = "Special" },
+  ["@lsp.type.const"] = { link = "Constant" },
   ["@lsp.type.modifier"] = { link = "Keyword" },
   ["@lsp.type.typeParameter.java"] = { link = "Structure" },
   ["@lsp.type.variable"] = { link = "Variable" },
@@ -36,9 +37,9 @@ return {
 
   ColorColumn = { bg = colors.term_background, fg = colors.white },
   CursorColumn = { link = "ColorColumn" },
-  CursorLine = { underline = true, bold = true },
+  CursorLine = { bg = colors.space1, bold = true },
   CursorLineFold = { bg = colors.term_background, fg = colors.red },
-  CursorLineNr = { bg = colors.term_background, fg = colors.red, bold = true, underline = true },
+  CursorLineNr = { bg = colors.term_background, fg = colors.red, bold = true },
   CursorLineSign = { bg = colors.term_background, fg = colors.red },
 
   LineNr = { bg = colors.term_background, fg = "#eeeeee", bold = true },

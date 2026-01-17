@@ -77,7 +77,7 @@ for dir, filetype in utils.scan_dir_nested(plugins_path) do
 
   local has_plugin_config, plugin_config = require_opt "init"
 
-  if has_plugin_config then
+  if has_plugin_config and type(plugin_config) == "table" then
     -- vim.notify("Loading: " .. plugin, vim.log.levels.TRACE)
 
     plugin_name = plugin_config.name or plugin_name
