@@ -81,7 +81,7 @@ end
 ---@param args vim.api.keyset.create_autocmd.callback_args
 ---@return function
 local function wrap_render_extmarks(args)
-  return vim.schedule_wrap(function ()
+  return vim.schedule_wrap(function()
     render_extmarks(args.buf)
   end)
 end
@@ -98,4 +98,3 @@ vim.api.nvim_create_autocmd({ "BufEnter", "WinResized", "VimResized" }, {
     wrap_render_extmarks(args)()
   end,
 })
-

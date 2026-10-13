@@ -1,0 +1,1 @@
+return { "wgsl_analyzer" }

@@ -16,6 +16,8 @@ local signs_hl = {
 vim.diagnostic.config {
   virtual_text = {
     prefix = "",
+    spacing = 5,
+    min = { severity = "Warning" },
   },
   signs = {
     text = {

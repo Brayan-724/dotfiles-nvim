@@ -3,8 +3,7 @@ return {
   settings = {
     ["rust-analyzer"] = {
       assist = {
-        importEnforceGranularity = true,
-        importPrefix = "create",
+        emitMustUse = true,
         preferSelf = true,
       },
       cache = {
@@ -35,12 +34,14 @@ return {
         },
       },
       imports = {
+        granularity = {
+          group = "module",
+        },
         group = {
           enable = true,
         },
-        granularity = {
-          enforce = true,
-          group = "module",
+        merge = {
+          enable = true,
         },
         prefix = "self",
       },

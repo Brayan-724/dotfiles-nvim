@@ -92,5 +92,12 @@ return function()
 
     -- git
     b.code_actions.gitsigns,
+
+    -- junk
+    b.formatting.just,       -- justfile
+    b.formatting.alejandra,  -- nix
+
+    b.formatting.markdownlint,
+    b.diagnostics.markdownlint,
   }
 end

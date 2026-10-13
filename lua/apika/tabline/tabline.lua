@@ -47,7 +47,16 @@ M.tabuflinePrev = function()
     return
   end
 
-  vim.cmd(curbufIndex == 1 and "b" .. bufs[#bufs] or "b" .. bufs[curbufIndex - 1])
+  local prevBuf = curbufIndex == 1 and #bufs or curbufIndex - 1
+  local nextPrevBuf = prevBuf
+
+  repeat
+    local ok, _ = pcall(vim.cmd, "b" .. bufs[nextPrevBuf])
+
+    nextPrevBuf = nextPrevBuf == 1 and #bufs or nextPrevBuf - 1
+
+    local has_completed_loop = nextPrevBuf == prevBuf
+  until ok or has_completed_loop
 end
 
 M.close_buffer = function(bufnr)
@@ -73,7 +82,7 @@ M.close_buffer = function(bufnr)
       local newBufIndex = curBufIndex == #vim.t.bufs and -1 or 1
       vim.cmd("b" .. vim.t.bufs[curBufIndex + newBufIndex])
 
-    -- handle unlisted
+      -- handle unlisted
     elseif not vim.bo.buflisted then
       local tmpbufnr = vim.t.bufs[1]
 

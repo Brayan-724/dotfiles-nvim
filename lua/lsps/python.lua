@@ -1,1 +1,6 @@
-return { "ruff" }
+return {
+  "ty",
+  settings = {
+    disagnosticMode = "workspace",
+  },
+}
